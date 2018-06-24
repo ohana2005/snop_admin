@@ -1,0 +1,8 @@
+/cache
+/log
+/.idea
+/.idea_modules
+/snop.sql
+/config/databases.yml
+/config/symfony.php
+/web/uploads
