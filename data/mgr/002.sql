@@ -1,0 +1,1 @@
+ALTER TABLE quizz_question_answer ADD COLUMN is_correct TINYINT(1);

@@ -1,0 +1,171 @@
+DefaultImage:
+  connection: doctrine  
+  actAs: [ImageBuilder]
+  columns:
+    name: string(255)
+    title: string(255)
+    image: {type: string(255), notnull: true} 
+
+TextBlock:
+  connection: doctrine
+  actAs:
+    I18n:
+      fields: [text]
+  columns:
+    name: {type: string(255), notnull: true}
+    title: {type: string(255)}
+    text: string()
+    application: string(32)
+    module: string(32)
+    special_mark: string(32)
+    is_visible_for_admin: {type: boolean, default: false}
+  indexes:
+    section_index:
+      fields: [application, module]
+
+Hotel:
+  connection: doctrine
+  actAs:
+    Sluggable:
+      unique: true
+      fields: [name]
+      canUpdate: true
+      builder: 'ProjectHelper::slug_builder'
+  columns:
+    admin_id: integer
+    name: {type: string(255), notnull: true}
+  relations:
+    Admin: {class: sfGuardUser, local: admin_id, type: one, foreignType: one, onDelete: CASCADE}
+
+HotelConfig:
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    keyname: {type: string(32), notnull: true}
+    section: {type: integer(2), unsigned: true, default: 1}
+    datatype: {type: string(32), default: 'string'}
+    label: {type: string(255)}
+    value: {type: string(255)}
+  relations:
+    Hotel: {foreignAlias: ConfigRecords, onDelete: CASCADE}
+
+RoomCategory:
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    name: {type: string(255), notnull: true}
+    description: string()
+    adults: {type: integer(2), unsigned: true, notnull: true}
+    children: {type: integer(2), unsigned: true, default: 0}
+    min_persons: {type: integer(2), unsigned: true, notnull: true}
+    max_persons: {type: integer(2), unsigned: true, notnull: true}
+    is_active: {type: boolean, default: true}
+  relations:
+    Hotel: {foreignAlias: Rooms, onDelete: CASCADE}
+
+RoomGallery:
+  connection: doctrine
+  actAs: [ImageBuilder]
+  columns:
+    room_category_id: {type: integer, notnull: true}
+    image: {type: string(255), notnull: true}
+  relations:
+    RoomCategory: {foreignAlias: Gallery, onDelete: CASCADE}
+
+Room:
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    room_category_id: {type: integer, notnull: true}
+    number: {type: string(32), notnull: true}
+  relations:
+    RoomCategory: {foreignAlias: Rooms, onDelete: CASCADE}
+
+RoomOccupancy:
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    room_occupancy_entity_id: integer
+    room_id: {type: integer, notnull: true}
+    booking_id: integer
+    info: string(255)
+    date: {type: date, notnull: true}
+    is_arrival: {type: boolean}
+    is_departure: {type: boolean}
+    is_occupied: {type: boolean}
+    is_closed: {type: boolean}
+  relations:
+    Hotel: {foreignAlias: RoomOccupancyRecords, onDelete: CASCADE}
+    Room: {foreignAlias: RoomOccupancyRecords, onDelete: CASCADE}
+    RoomOccupancyEntity: {foreignAlias: RoomOccupancyRecords, onDelete: CASCADE}
+
+RoomOccupancyEntity:
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    typeid: {type: integer(1), unsigned: true} #booking = 1, #reservation=2, lastminute=3, offer=4
+    name: string(255)
+    description: string()
+  relations:
+    Hotel: {foreignAlias: RoomOccupancyEntities, onDelete: CASCADE}
+
+PriceItem:
+  connection: doctrine
+  columns:
+    price_item_type: {type: integer(1), unsigned: true, notnull: true}
+    hotel_id: {type: integer, notnull: true}
+    date: {type: date, notnull: true}
+    price: float
+    room_category_id: integer
+    package_item_id: integer
+  relations:
+    Hotel: {foreignAlias: PriceItems, onDelete: CASCADE}
+    PriceItemType: {foreignAlias: PriceItems, onDelete: CASCADE}
+    RoomCategory: {foreignAlias: PriceItems, onDelete: CASCADE}
+
+Package:
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    name: {type: string(255), notnull: true}
+    description: string()
+  relations:
+    Hotel: {foreignAlias: Packages, onDelete: CASCADE}
+    PackageItems: {class: PackageItem, refClass: PackageItem2Package, foreignAlias: Packages}
+
+PackageItem:
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    name: string(255)
+    per_adult: {type: boolean}
+    per_child: {type: boolean}
+  relations:
+    Hotel: {foreignAlias: PackageItems, onDelete: CASCADE}
+
+PackageItem2Package:
+  connection: doctrine
+  columns:
+    package_item_id: {type: integer, notnull: true, primary: true}
+    package_id: {type: integer, notnull: true, primary: true}
+  relations:
+    PackageItem: {onDelete: CASCADE}
+    Package: {onDelete: CASCADE}
+
+ChildCategory:
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    name: string(32)
+    age: {type: integer(2), unsigned: true}
+  relations:
+    Hotel: {foreignAlias: PackageItems, onDelete: CASCADE}
+
+PackageItem2ChildCategory:
+  connection: doctrine
+  columns:
+    package_item_id: {type: integer, notnull: true, primary: true}
+    child_category_id: {type: integer, notnull: true, primary: true}
+  relations:
+    PackageItem: {onDelete: CASCADE}
+    ChildCategory: {onDelete: CASCADE}

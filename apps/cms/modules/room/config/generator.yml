@@ -1,0 +1,62 @@
+generator:
+  class: myDoctrineGenerator
+  param:
+    model_class:           Room
+    theme:                 my_admin_lanceng
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          room
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        table_method: tmListHotel
+        display: [RoomCategory, number]
+        batch_actions: {}
+        object_actions:
+          occupancy: {label: '<i class="fa fa-cloud"></i>', action: occupancy, params: {class: 'btn btn-default', title: 'Occupancy'}}
+          _edit: ~
+          _delete: ~
+      filter:
+        display: [number, room_category_id]
+      form:
+        class: RoomFormHotel
+      edit:    ~
+      new:     ~
+      
+#    extra:
+#      export:
+#        filename: '%date% - My export'
+#        mode: 'csv'      #[csv, xlsx]
+#        dateformat: 'Y.m.d'
+#        encoding: 'windows-1251'
+#      javascript:
+#        ajax_form_validation: #22.10.2014
+#          fields: [name, email, directory]
+#        remoteoptions:
+#          purchase:
+#            trigger: purchase_id
+#            url: util/purchasePriceByPurchase
+#            update: purchase_price_id
+#        remotedata:
+#          customer:
+#            trigger: customer_id
+#            url: util/remoteCustomerData
+#            fields: [customer_name, customer_address]  
+#        showhide_form_fields:
+#          selloff:
+#            toggler: selloff_enabled
+#            fields: [selloff_price, selloff_end_date]
+#           #reverse: true
+#        showhide_selects:
+#          type:
+#            toggler: type
+#            values:
+#              default: []
+#              articles: [articles]
+#              category: [category_discount, categories_list]

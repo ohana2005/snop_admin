@@ -1,0 +1,55 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+all:
+  sf_admin_dash:
+    site: 'Snop'
+
+    menu:
+      Content:
+        icon: barcode
+        items:
+          Default Image:
+            icon: picture
+            url:          default_image
+          Text Blocks:
+            icon: file-text              
+            url:          text_block
+      Hotels:
+        url: 'hotel/index'
+        icon: user
+
+    menu2:
+      Rooms:
+        icon: barcode
+        items:
+          Categories:
+            icon: picture
+            url: room_category
+          Rooms:
+            icon: file-text
+            url:  room
+          Prices:
+            icon: file-text
+            url: room_category/prices
+      Packages:
+        icon: envelope
+        items:
+          Packages:
+            icon: picture
+            url: package
+          Items:
+            icon: file-text
+            url:  package_item
+          Prices:
+            icon: file-text
+            url:  package_item/prices
+      Settings:
+        icon: gear
+        items:
+          Hotel Settings:
+            url: hotel_config
+            icon: gear
+          Child Categories:
+            url: child_category
+            icon: gear

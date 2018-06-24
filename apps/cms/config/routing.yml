@@ -1,0 +1,111 @@
+child_category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ChildCategory
+    module:               child_category
+    prefix_path:          /child_category
+    column:               id
+    with_wildcard_routes: true
+
+package_item:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                PackageItem
+    module:               package_item
+    prefix_path:          /package_item
+    column:               id
+    with_wildcard_routes: true
+
+package:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Package
+    module:               package
+    prefix_path:          /package
+    column:               id
+    with_wildcard_routes: true
+
+room:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Room
+    module:               room
+    prefix_path:          /room
+    column:               id
+    with_wildcard_routes: true
+
+hotel_config:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                HotelConfig
+    module:               hotel_config
+    prefix_path:          /hotel_config
+    column:               id
+    with_wildcard_routes: true
+
+room_category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                RoomCategory
+    module:               room_category
+    prefix_path:          /room_category
+    column:               id
+    with_wildcard_routes: true
+
+hotel_admin:
+  url: hotel/:id/admin
+  param: {module: hotel, action: admin}
+
+hotel:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Hotel
+    module:               hotel
+    prefix_path:          /hotel
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user_user_user:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               user_user
+    prefix_path:          /user_user
+    column:               id
+    with_wildcard_routes: true
+
+
+
+
+text_block:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TextBlock
+    module:               text_block
+    prefix_path:          /text_block
+    column:               id
+    with_wildcard_routes: true
+
+
+
+default_image:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DefaultImage
+    module:               default_image
+    prefix_path:          /default_image
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user:
+  class: sfDoctrineRouteCollection
+  options: { model: sfGuardUser, module: user, prefix_path: /user, column: id, with_wildcard_routes: true }
+
+homepage:
+  url: /
+  param: { module: dashboard, action: index}
+default_index:
+  url: '/:module'
+  param: { action: index }
+default:
+  url: '/:module/:action/*'
