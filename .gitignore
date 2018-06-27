@@ -6,3 +6,5 @@
 /config/databases.yml
 /config/symfony.php
 /web/uploads
+/Archive.zip
+/vendor
