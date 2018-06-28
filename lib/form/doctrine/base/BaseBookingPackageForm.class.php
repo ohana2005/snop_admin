@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Hotel form base class.
+ * BookingPackage form base class.
  * sfDoctrineFormGenerator 
- * @method Hotel getObject() Returns the current form's model object
+ * @method BookingPackage getObject() Returns the current form's model object
  *
  * @package    cms
  * @subpackage form
@@ -14,7 +14,7 @@
    
    
  
-abstract class BaseHotelForm extends BaseFormDoctrine
+abstract class BaseBookingPackageForm extends BaseFormDoctrine
 {
   public function setup()
   {
@@ -22,35 +22,42 @@ abstract class BaseHotelForm extends BaseFormDoctrine
        
             
             
-              'id'       => new sfWidgetFormInputHidden(),
+              'id'           => new sfWidgetFormInputHidden(),
       
         
         
        
             
             
-              'admin_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'add_empty' => true)),
+              'hotel_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => false)),
       
         
         
        
             
             
-              'name'     => new sfWidgetFormInputText(),
+              'booking_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Booking'), 'add_empty' => false)),
       
         
         
        
             
             
-              'apihash'  => new sfWidgetFormInputText(),
+              'package_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Package'), 'add_empty' => true)),
       
         
         
        
             
             
-              'slug'     => new sfWidgetFormInputText(),
+              'package_name' => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'price'        => new sfWidgetFormInputText(),
       
         
         
@@ -58,22 +65,20 @@ abstract class BaseHotelForm extends BaseFormDoctrine
 
     $this->setValidators(array(
             
-              'id'       => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+              'id'           => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
                   
-              'admin_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'required' => false)),
+              'hotel_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'))),
                   
-              'name'     => new sfValidatorString(array('max_length' => 255)),
+              'booking_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Booking'))),
                   
-              'apihash'  => new sfValidatorString(array('max_length' => 40, 'required' => false)),
+              'package_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Package'), 'required' => false)),
                   
-              'slug'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+              'package_name' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+                  
+              'price'        => new sfValidatorNumber(array('required' => false)),
           ));
 
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Hotel', 'column' => array('slug')))
-    );
-
-    $this->widgetSchema->setNameFormat('hotel[%s]');
+    $this->widgetSchema->setNameFormat('booking_package[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
@@ -89,7 +94,7 @@ abstract class BaseHotelForm extends BaseFormDoctrine
 
   public function getModelName()
   {
-    return 'Hotel';
+    return 'BookingPackage';
   }
     public function updateObject($values = null)
     {

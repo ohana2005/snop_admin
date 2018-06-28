@@ -34,6 +34,7 @@ Hotel:
   columns:
     admin_id: integer
     name: {type: string(255), notnull: true}
+    apihash: string(40)
   relations:
     Admin: {class: sfGuardUser, local: admin_id, type: one, foreignType: one, onDelete: CASCADE}
 
@@ -98,16 +99,19 @@ RoomOccupancy:
     Hotel: {foreignAlias: RoomOccupancyRecords, onDelete: CASCADE}
     Room: {foreignAlias: RoomOccupancyRecords, onDelete: CASCADE}
     RoomOccupancyEntity: {foreignAlias: RoomOccupancyRecords, onDelete: CASCADE}
+    Booking: {foreignAlias: RoomOccupancyRecords, onDelete: CASCADE}
 
 RoomOccupancyEntity:
   connection: doctrine
   columns:
     hotel_id: {type: integer, notnull: true}
+    booking_id: integer
     typeid: {type: integer(1), unsigned: true} #booking = 1, #reservation=2, lastminute=3, offer=4
     name: string(255)
     description: string()
   relations:
     Hotel: {foreignAlias: RoomOccupancyEntities, onDelete: CASCADE}
+    Booking: {foreignAlias: RoomOccupancyEntities, onDelete: CASCADE}
 
 PriceItem:
   connection: doctrine
@@ -129,6 +133,12 @@ Package:
     hotel_id: {type: integer, notnull: true}
     name: {type: string(255), notnull: true}
     description: string()
+    min_stay: {type: integer(2), unsigned: true, default: 1}
+    max_stay: {type: integer(2), unsigned: true, default: 99}
+    min_adults: {type: integer(2), unsigned: true, default: 1}
+    max_adults: {type: integer(2), unsigned: true, default: 99}
+    min_children: {type: integer(2), unsigned: true, default: 0}
+    max_children: {type: integer(2), unsigned: true, default: 99}
   relations:
     Hotel: {foreignAlias: Packages, onDelete: CASCADE}
     PackageItems: {class: PackageItem, refClass: PackageItem2Package, foreignAlias: Packages}
@@ -138,8 +148,9 @@ PackageItem:
   columns:
     hotel_id: {type: integer, notnull: true}
     name: string(255)
-    per_adult: {type: boolean}
-    per_child: {type: boolean}
+    per_period: {type: enum, values: [day, booking]}
+    per_person: {type: enum, values: [room, person, adult, child]}
+    is_discount: boolean
   relations:
     Hotel: {foreignAlias: PackageItems, onDelete: CASCADE}
 
@@ -169,3 +180,49 @@ PackageItem2ChildCategory:
   relations:
     PackageItem: {onDelete: CASCADE}
     ChildCategory: {onDelete: CASCADE}
+
+Booking:
+  actAs: [Timestampable]
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    date_arrival: {type: date, notnull: true}
+    date_departure: {type: integer, notnull: true}
+    adults: {type: integer(2), unsigned: true, notnull: true}
+    children: {type: integer(2), unsigned: true}
+    nights: {type: integer(2), unsigned: true}
+    guest_name: {type: string(255), notnull: true}
+    guest_email: string(255)
+    guest_telephone: string(255)
+    guest_wish: string()
+    price: float
+  relations:
+    Hotel: {foreignAlias: Bookings, onDelete: CASCADE}
+
+BookingRoom:
+  connection: doctrine
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    booking_id: {type: integer, notnull: true}
+    room_category_id: integer
+    room_id: integer
+    room_category_name: string(255)
+    room_number: string(32)
+    price: float
+  relations:
+    Hotel: {foreignAlias: BookingRooms, onDelete: CASCADE}
+    Booking: {foreignAlias: BookingRooms, onDelete: CASCADE}
+    RoomCategory: {foreignAlias: BookingRooms, onDelete: SET NULL}
+    Room: {foreignAlias: BookingRooms, onDelete: SET NULL}
+
+BookingPackage:
+  columns:
+    hotel_id: {type: integer, notnull: true}
+    booking_id: {type: integer, notnull: true}
+    package_id: {type: integer}
+    package_name: string(255)
+    price: float
+  relations:
+    Hotel: {foreignAlias: BookingPackages, onDelete: CASCADE}
+    Booking: {foreignAlias: BookingPackages, onDelete: CASCADE}
+    Package: {foreignAlias: BookingPackages, onDelete: SET NULL}

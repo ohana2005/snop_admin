@@ -14,6 +14,7 @@ abstract class BaseRoomOccupancyEntityFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'hotel_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => true)),
+      'booking_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Booking'), 'add_empty' => true)),
       'typeid'      => new sfWidgetFormFilterInput(),
       'name'        => new sfWidgetFormFilterInput(),
       'description' => new sfWidgetFormFilterInput(),
@@ -21,6 +22,7 @@ abstract class BaseRoomOccupancyEntityFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'hotel_id'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Hotel'), 'column' => 'id')),
+      'booking_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Booking'), 'column' => 'id')),
       'typeid'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'name'        => new sfValidatorPass(array('required' => false)),
       'description' => new sfValidatorPass(array('required' => false)),
@@ -46,6 +48,7 @@ abstract class BaseRoomOccupancyEntityFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'          => 'Number',
       'hotel_id'    => 'ForeignKey',
+      'booking_id'  => 'ForeignKey',
       'typeid'      => 'Number',
       'name'        => 'Text',
       'description' => 'Text',

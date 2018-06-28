@@ -43,14 +43,21 @@ abstract class BasePackageItemForm extends BaseFormDoctrine
        
             
             
-              'per_adult'     => new sfWidgetFormInputCheckbox(),
+              'per_period'    => new sfWidgetFormChoice(array('choices' => array('day' => 'day', 'booking' => 'booking'))),
       
         
         
        
             
             
-              'per_child'     => new sfWidgetFormInputCheckbox(),
+              'per_person'    => new sfWidgetFormChoice(array('choices' => array('room' => 'room', 'person' => 'person', 'adult' => 'adult', 'child' => 'child'))),
+      
+        
+        
+       
+            
+            
+              'is_discount'   => new sfWidgetFormInputCheckbox(),
       
         
         
@@ -65,9 +72,11 @@ abstract class BasePackageItemForm extends BaseFormDoctrine
                   
               'name'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   
-              'per_adult'     => new sfValidatorBoolean(array('required' => false)),
+              'per_period'    => new sfValidatorChoice(array('choices' => array(0 => 'day', 1 => 'booking'), 'required' => false)),
                   
-              'per_child'     => new sfValidatorBoolean(array('required' => false)),
+              'per_person'    => new sfValidatorChoice(array('choices' => array(0 => 'room', 1 => 'person', 2 => 'adult', 3 => 'child'), 'required' => false)),
+                  
+              'is_discount'   => new sfValidatorBoolean(array('required' => false)),
             'packages_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Package', 'required' => false)),
     ));
 

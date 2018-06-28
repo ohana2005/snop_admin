@@ -10,22 +10,43 @@ Doctrine_Manager::getInstance()->bindComponent('Package', 'doctrine');
  * @property integer $hotel_id
  * @property string $name
  * @property string $description
+ * @property integer $min_stay
+ * @property integer $max_stay
+ * @property integer $min_adults
+ * @property integer $max_adults
+ * @property integer $min_children
+ * @property integer $max_children
  * @property Hotel $Hotel
  * @property Doctrine_Collection $PackageItems
  * @property Doctrine_Collection $PackageItem2Package
+ * @property Doctrine_Collection $BookingPackages
  * 
  * @method integer             getHotelId()             Returns the current record's "hotel_id" value
  * @method string              getName()                Returns the current record's "name" value
  * @method string              getDescription()         Returns the current record's "description" value
+ * @method integer             getMinStay()             Returns the current record's "min_stay" value
+ * @method integer             getMaxStay()             Returns the current record's "max_stay" value
+ * @method integer             getMinAdults()           Returns the current record's "min_adults" value
+ * @method integer             getMaxAdults()           Returns the current record's "max_adults" value
+ * @method integer             getMinChildren()         Returns the current record's "min_children" value
+ * @method integer             getMaxChildren()         Returns the current record's "max_children" value
  * @method Hotel               getHotel()               Returns the current record's "Hotel" value
  * @method Doctrine_Collection getPackageItems()        Returns the current record's "PackageItems" collection
  * @method Doctrine_Collection getPackageItem2Package() Returns the current record's "PackageItem2Package" collection
+ * @method Doctrine_Collection getBookingPackages()     Returns the current record's "BookingPackages" collection
  * @method Package             setHotelId()             Sets the current record's "hotel_id" value
  * @method Package             setName()                Sets the current record's "name" value
  * @method Package             setDescription()         Sets the current record's "description" value
+ * @method Package             setMinStay()             Sets the current record's "min_stay" value
+ * @method Package             setMaxStay()             Sets the current record's "max_stay" value
+ * @method Package             setMinAdults()           Sets the current record's "min_adults" value
+ * @method Package             setMaxAdults()           Sets the current record's "max_adults" value
+ * @method Package             setMinChildren()         Sets the current record's "min_children" value
+ * @method Package             setMaxChildren()         Sets the current record's "max_children" value
  * @method Package             setHotel()               Sets the current record's "Hotel" value
  * @method Package             setPackageItems()        Sets the current record's "PackageItems" collection
  * @method Package             setPackageItem2Package() Sets the current record's "PackageItem2Package" collection
+ * @method Package             setBookingPackages()     Sets the current record's "BookingPackages" collection
  * 
  * @package    cms
  * @subpackage model
@@ -50,6 +71,42 @@ abstract class BasePackage extends sfDoctrineRecord
              'type' => 'string',
              'length' => '',
              ));
+        $this->hasColumn('min_stay', 'integer', 2, array(
+             'type' => 'integer',
+             'unsigned' => true,
+             'default' => 1,
+             'length' => 2,
+             ));
+        $this->hasColumn('max_stay', 'integer', 2, array(
+             'type' => 'integer',
+             'unsigned' => true,
+             'default' => 99,
+             'length' => 2,
+             ));
+        $this->hasColumn('min_adults', 'integer', 2, array(
+             'type' => 'integer',
+             'unsigned' => true,
+             'default' => 1,
+             'length' => 2,
+             ));
+        $this->hasColumn('max_adults', 'integer', 2, array(
+             'type' => 'integer',
+             'unsigned' => true,
+             'default' => 99,
+             'length' => 2,
+             ));
+        $this->hasColumn('min_children', 'integer', 2, array(
+             'type' => 'integer',
+             'unsigned' => true,
+             'default' => 0,
+             'length' => 2,
+             ));
+        $this->hasColumn('max_children', 'integer', 2, array(
+             'type' => 'integer',
+             'unsigned' => true,
+             'default' => 99,
+             'length' => 2,
+             ));
     }
 
     public function setUp()
@@ -66,6 +123,10 @@ abstract class BasePackage extends sfDoctrineRecord
              'foreign' => 'package_item_id'));
 
         $this->hasMany('PackageItem2Package', array(
+             'local' => 'id',
+             'foreign' => 'package_id'));
+
+        $this->hasMany('BookingPackage as BookingPackages', array(
              'local' => 'id',
              'foreign' => 'package_id'));
     }

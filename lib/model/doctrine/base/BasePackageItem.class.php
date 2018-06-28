@@ -9,8 +9,9 @@ Doctrine_Manager::getInstance()->bindComponent('PackageItem', 'doctrine');
  * 
  * @property integer $hotel_id
  * @property string $name
- * @property boolean $per_adult
- * @property boolean $per_child
+ * @property enum $per_period
+ * @property enum $per_person
+ * @property boolean $is_discount
  * @property Hotel $Hotel
  * @property Doctrine_Collection $Packages
  * @property Doctrine_Collection $PackageItem2Package
@@ -18,16 +19,18 @@ Doctrine_Manager::getInstance()->bindComponent('PackageItem', 'doctrine');
  * 
  * @method integer             getHotelId()                   Returns the current record's "hotel_id" value
  * @method string              getName()                      Returns the current record's "name" value
- * @method boolean             getPerAdult()                  Returns the current record's "per_adult" value
- * @method boolean             getPerChild()                  Returns the current record's "per_child" value
+ * @method enum                getPerPeriod()                 Returns the current record's "per_period" value
+ * @method enum                getPerPerson()                 Returns the current record's "per_person" value
+ * @method boolean             getIsDiscount()                Returns the current record's "is_discount" value
  * @method Hotel               getHotel()                     Returns the current record's "Hotel" value
  * @method Doctrine_Collection getPackages()                  Returns the current record's "Packages" collection
  * @method Doctrine_Collection getPackageItem2Package()       Returns the current record's "PackageItem2Package" collection
  * @method Doctrine_Collection getPackageItem2ChildCategory() Returns the current record's "PackageItem2ChildCategory" collection
  * @method PackageItem         setHotelId()                   Sets the current record's "hotel_id" value
  * @method PackageItem         setName()                      Sets the current record's "name" value
- * @method PackageItem         setPerAdult()                  Sets the current record's "per_adult" value
- * @method PackageItem         setPerChild()                  Sets the current record's "per_child" value
+ * @method PackageItem         setPerPeriod()                 Sets the current record's "per_period" value
+ * @method PackageItem         setPerPerson()                 Sets the current record's "per_person" value
+ * @method PackageItem         setIsDiscount()                Sets the current record's "is_discount" value
  * @method PackageItem         setHotel()                     Sets the current record's "Hotel" value
  * @method PackageItem         setPackages()                  Sets the current record's "Packages" collection
  * @method PackageItem         setPackageItem2Package()       Sets the current record's "PackageItem2Package" collection
@@ -51,10 +54,25 @@ abstract class BasePackageItem extends sfDoctrineRecord
              'type' => 'string',
              'length' => 255,
              ));
-        $this->hasColumn('per_adult', 'boolean', null, array(
-             'type' => 'boolean',
+        $this->hasColumn('per_period', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'day',
+              1 => 'booking',
+             ),
              ));
-        $this->hasColumn('per_child', 'boolean', null, array(
+        $this->hasColumn('per_person', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'room',
+              1 => 'person',
+              2 => 'adult',
+              3 => 'child',
+             ),
+             ));
+        $this->hasColumn('is_discount', 'boolean', null, array(
              'type' => 'boolean',
              ));
     }

@@ -36,6 +36,13 @@ abstract class BaseRoomOccupancyEntityForm extends BaseFormDoctrine
        
             
             
+              'booking_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Booking'), 'add_empty' => true)),
+      
+        
+        
+       
+            
+            
               'typeid'      => new sfWidgetFormInputText(),
       
         
@@ -61,6 +68,8 @@ abstract class BaseRoomOccupancyEntityForm extends BaseFormDoctrine
               'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
                   
               'hotel_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'))),
+                  
+              'booking_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Booking'), 'required' => false)),
                   
               'typeid'      => new sfValidatorInteger(array('required' => false)),
                   

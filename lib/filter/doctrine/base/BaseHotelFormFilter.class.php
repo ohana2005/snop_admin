@@ -15,12 +15,14 @@ abstract class BaseHotelFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'admin_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'add_empty' => true)),
       'name'     => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'apihash'  => new sfWidgetFormFilterInput(),
       'slug'     => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
       'admin_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Admin'), 'column' => 'id')),
       'name'     => new sfValidatorPass(array('required' => false)),
+      'apihash'  => new sfValidatorPass(array('required' => false)),
       'slug'     => new sfValidatorPass(array('required' => false)),
     ));
 
@@ -45,6 +47,7 @@ abstract class BaseHotelFormFilter extends BaseFormFilterDoctrine
       'id'       => 'Number',
       'admin_id' => 'ForeignKey',
       'name'     => 'Text',
+      'apihash'  => 'Text',
       'slug'     => 'Text',
     );
   }
