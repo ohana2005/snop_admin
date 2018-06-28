@@ -15,7 +15,7 @@ abstract class BaseBookingFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'hotel_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => true)),
       'date_arrival'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'date_departure'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'date_departure'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'adults'          => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'children'        => new sfWidgetFormFilterInput(),
       'nights'          => new sfWidgetFormFilterInput(),
@@ -24,6 +24,8 @@ abstract class BaseBookingFormFilter extends BaseFormFilterDoctrine
       'guest_telephone' => new sfWidgetFormFilterInput(),
       'guest_wish'      => new sfWidgetFormFilterInput(),
       'price'           => new sfWidgetFormFilterInput(),
+      'summary'         => new sfWidgetFormFilterInput(),
+      'hash'            => new sfWidgetFormFilterInput(),
       'created_at'      => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'      => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
     ));
@@ -31,7 +33,7 @@ abstract class BaseBookingFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'hotel_id'        => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Hotel'), 'column' => 'id')),
       'date_arrival'    => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
-      'date_departure'  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'date_departure'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
       'adults'          => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'children'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'nights'          => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
@@ -40,6 +42,8 @@ abstract class BaseBookingFormFilter extends BaseFormFilterDoctrine
       'guest_telephone' => new sfValidatorPass(array('required' => false)),
       'guest_wish'      => new sfValidatorPass(array('required' => false)),
       'price'           => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'summary'         => new sfValidatorPass(array('required' => false)),
+      'hash'            => new sfValidatorPass(array('required' => false)),
       'created_at'      => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'      => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
     ));
@@ -65,7 +69,7 @@ abstract class BaseBookingFormFilter extends BaseFormFilterDoctrine
       'id'              => 'Number',
       'hotel_id'        => 'ForeignKey',
       'date_arrival'    => 'Date',
-      'date_departure'  => 'Number',
+      'date_departure'  => 'Date',
       'adults'          => 'Number',
       'children'        => 'Number',
       'nights'          => 'Number',
@@ -74,6 +78,8 @@ abstract class BaseBookingFormFilter extends BaseFormFilterDoctrine
       'guest_telephone' => 'Text',
       'guest_wish'      => 'Text',
       'price'           => 'Number',
+      'summary'         => 'Text',
+      'hash'            => 'Text',
       'created_at'      => 'Date',
       'updated_at'      => 'Date',
     );

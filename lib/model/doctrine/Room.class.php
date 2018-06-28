@@ -13,7 +13,8 @@
 class Room extends BaseRoom
 {
 
-    protected $_occupancy = array();
+    protected $_occupancy = [];
+    protected $_currentOccupancyDescription;
     public function loadOccupancy($from, $to) {
         $q = Q::c('RoomOccupancy', 'o')
             ->innerJoin('o.RoomOccupancyEntity e')
@@ -53,5 +54,62 @@ class Room extends BaseRoom
             }
         }
         return $class;
+    }
+
+    public function isFree($arrivalDate, $departureDate){
+        $this->_occupancy = [];
+        $this->loadOccupancy($arrivalDate, $departureDate);
+        if(empty($this->_occupancy)){
+            return true;
+        }
+        foreach($this->_occupancy as $date => $ro){
+            if($date == $arrivalDate && $ro['is_departure']){
+                continue;
+            }
+            if($date == $departureDate && $ro['is_arrival']){
+                continue;
+            }
+            $this->_currentOccupancyDescription = $ro['info'] . "\n" . $ro['info2'];
+            return false;
+        }
+        return true;
+    }
+
+    public function getCurrentOccupancyDescription(){
+        return $this->_currentOccupancyDescription;
+    }
+
+    public function createBookingOccupancy(Booking $Booking)
+    {
+        $roe = new RoomOccupancyEntity();
+        $roe->fromArray([
+            'hotel_id' => $this->hotel_id,
+            'booking_id' => $Booking->id,
+            'typeid' => RoomOccupancyEntity::OCC_BOOKING,
+            'name' => $Booking->guest_name,
+            'description' => $Booking->guest_email . '/' . $Booking->guest_telephone
+        ]);
+        $roe->save();
+
+        $dates = P::createDateRangeArray($Booking->date_arrival, $Booking->date_departure);
+
+        foreach($dates as $date){
+            $ro = new RoomOccupancy();
+            $ro->fromArray([
+                'hotel_id' => $this->hotel_id,
+                'room_occupancy_entity_id' => $roe->id,
+                'booking_id' => $Booking->id,
+                'date' => $date,
+                'room_id' => $this->id
+            ]);
+            if($date == $Booking->date_departure){
+                $ro->is_departure = true;
+            }elseif($date == $Booking->date_arrival){
+                $ro->is_arrival = true;
+            }else{
+                $ro->is_occupied = true;
+            }
+            $ro->save();
+        }
     }
 }

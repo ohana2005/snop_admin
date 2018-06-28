@@ -14,3 +14,7 @@ ALTER TABLE package ADD COLUMN  min_adults SMALLINT UNSIGNED DEFAULT 1 AFTER max
 ALTER TABLE package ADD COLUMN   max_adults SMALLINT UNSIGNED DEFAULT 99 AFTER min_adults;
 ALTER TABLE package ADD COLUMN    min_children SMALLINT UNSIGNED DEFAULT 0 AFTER max_adults;
 ALTER TABLE package ADD COLUMN     max_children SMALLINT UNSIGNED DEFAULT 99 after min_children;
+
+
+ALTER TABLE booking ADD COLUMN      summary TEXT after price;
+ALTER TABLE booking ADD COLUMN       hash VARCHAR(40) after summary;

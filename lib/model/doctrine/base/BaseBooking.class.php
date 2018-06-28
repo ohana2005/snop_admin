@@ -9,7 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * 
  * @property integer $hotel_id
  * @property date $date_arrival
- * @property integer $date_departure
+ * @property date $date_departure
  * @property integer $adults
  * @property integer $children
  * @property integer $nights
@@ -18,6 +18,8 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * @property string $guest_telephone
  * @property string $guest_wish
  * @property float $price
+ * @property string $summary
+ * @property string $hash
  * @property Hotel $Hotel
  * @property Doctrine_Collection $RoomOccupancyRecords
  * @property Doctrine_Collection $RoomOccupancyEntities
@@ -26,7 +28,7 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * 
  * @method integer             getHotelId()               Returns the current record's "hotel_id" value
  * @method date                getDateArrival()           Returns the current record's "date_arrival" value
- * @method integer             getDateDeparture()         Returns the current record's "date_departure" value
+ * @method date                getDateDeparture()         Returns the current record's "date_departure" value
  * @method integer             getAdults()                Returns the current record's "adults" value
  * @method integer             getChildren()              Returns the current record's "children" value
  * @method integer             getNights()                Returns the current record's "nights" value
@@ -35,6 +37,8 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * @method string              getGuestTelephone()        Returns the current record's "guest_telephone" value
  * @method string              getGuestWish()             Returns the current record's "guest_wish" value
  * @method float               getPrice()                 Returns the current record's "price" value
+ * @method string              getSummary()               Returns the current record's "summary" value
+ * @method string              getHash()                  Returns the current record's "hash" value
  * @method Hotel               getHotel()                 Returns the current record's "Hotel" value
  * @method Doctrine_Collection getRoomOccupancyRecords()  Returns the current record's "RoomOccupancyRecords" collection
  * @method Doctrine_Collection getRoomOccupancyEntities() Returns the current record's "RoomOccupancyEntities" collection
@@ -51,6 +55,8 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * @method Booking             setGuestTelephone()        Sets the current record's "guest_telephone" value
  * @method Booking             setGuestWish()             Sets the current record's "guest_wish" value
  * @method Booking             setPrice()                 Sets the current record's "price" value
+ * @method Booking             setSummary()               Sets the current record's "summary" value
+ * @method Booking             setHash()                  Sets the current record's "hash" value
  * @method Booking             setHotel()                 Sets the current record's "Hotel" value
  * @method Booking             setRoomOccupancyRecords()  Sets the current record's "RoomOccupancyRecords" collection
  * @method Booking             setRoomOccupancyEntities() Sets the current record's "RoomOccupancyEntities" collection
@@ -75,8 +81,8 @@ abstract class BaseBooking extends sfDoctrineRecord
              'type' => 'date',
              'notnull' => true,
              ));
-        $this->hasColumn('date_departure', 'integer', null, array(
-             'type' => 'integer',
+        $this->hasColumn('date_departure', 'date', null, array(
+             'type' => 'date',
              'notnull' => true,
              ));
         $this->hasColumn('adults', 'integer', 2, array(
@@ -114,6 +120,14 @@ abstract class BaseBooking extends sfDoctrineRecord
              ));
         $this->hasColumn('price', 'float', null, array(
              'type' => 'float',
+             ));
+        $this->hasColumn('summary', 'string', null, array(
+             'type' => 'string',
+             'length' => '',
+             ));
+        $this->hasColumn('hash', 'string', 40, array(
+             'type' => 'string',
+             'length' => 40,
              ));
     }
 

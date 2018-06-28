@@ -43,7 +43,7 @@ abstract class BaseBookingForm extends BaseFormDoctrine
        
             
             
-              'date_departure'  => new sfWidgetFormInputText(),
+              'date_departure'  => new sfWidgetFormDate(),
       
         
         
@@ -106,6 +106,20 @@ abstract class BaseBookingForm extends BaseFormDoctrine
        
             
             
+              'summary'         => new sfWidgetFormTextarea(),
+      
+        
+        
+       
+            
+            
+              'hash'            => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
               'created_at'      => new sfWidgetFormDateTime(),
       
         
@@ -127,7 +141,7 @@ abstract class BaseBookingForm extends BaseFormDoctrine
                   
               'date_arrival'    => new sfValidatorDate(),
                   
-              'date_departure'  => new sfValidatorInteger(),
+              'date_departure'  => new sfValidatorDate(),
                   
               'adults'          => new sfValidatorInteger(),
                   
@@ -144,6 +158,10 @@ abstract class BaseBookingForm extends BaseFormDoctrine
               'guest_wish'      => new sfValidatorString(array('required' => false)),
                   
               'price'           => new sfValidatorNumber(array('required' => false)),
+                  
+              'summary'         => new sfValidatorString(array('required' => false)),
+                  
+              'hash'            => new sfValidatorString(array('max_length' => 40, 'required' => false)),
                   
               'created_at'      => new sfValidatorDateTime(),
                   

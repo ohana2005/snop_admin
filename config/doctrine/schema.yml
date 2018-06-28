@@ -187,7 +187,7 @@ Booking:
   columns:
     hotel_id: {type: integer, notnull: true}
     date_arrival: {type: date, notnull: true}
-    date_departure: {type: integer, notnull: true}
+    date_departure: {type: date, notnull: true}
     adults: {type: integer(2), unsigned: true, notnull: true}
     children: {type: integer(2), unsigned: true}
     nights: {type: integer(2), unsigned: true}
@@ -196,6 +196,8 @@ Booking:
     guest_telephone: string(255)
     guest_wish: string()
     price: float
+    summary: string()
+    hash: string(40)
   relations:
     Hotel: {foreignAlias: Bookings, onDelete: CASCADE}
 
