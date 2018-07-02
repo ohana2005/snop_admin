@@ -43,6 +43,13 @@ abstract class BaseHotelForm extends BaseFormDoctrine
        
             
             
+              'apihash'  => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
               'slug'     => new sfWidgetFormInputText(),
       
         
@@ -56,6 +63,8 @@ abstract class BaseHotelForm extends BaseFormDoctrine
               'admin_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'required' => false)),
                   
               'name'     => new sfValidatorString(array('max_length' => 255)),
+                  
+              'apihash'  => new sfValidatorString(array('max_length' => 40, 'required' => false)),
                   
               'slug'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
           ));

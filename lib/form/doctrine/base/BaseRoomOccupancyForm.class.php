@@ -50,7 +50,7 @@ abstract class BaseRoomOccupancyForm extends BaseFormDoctrine
        
             
             
-              'booking_id'               => new sfWidgetFormInputText(),
+              'booking_id'               => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Booking'), 'add_empty' => true)),
       
         
         
@@ -108,7 +108,7 @@ abstract class BaseRoomOccupancyForm extends BaseFormDoctrine
                   
               'room_id'                  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Room'))),
                   
-              'booking_id'               => new sfValidatorInteger(array('required' => false)),
+              'booking_id'               => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Booking'), 'required' => false)),
                   
               'info'                     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   

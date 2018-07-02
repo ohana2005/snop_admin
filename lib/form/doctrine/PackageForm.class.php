@@ -12,5 +12,6 @@ class PackageForm extends BasePackageForm
 {
   public function configure()
   {
+      $this->widgetSchema['package_items_list']->setOption('expanded', true);
   }
 }

@@ -20,6 +20,7 @@ Doctrine_Manager::getInstance()->bindComponent('RoomOccupancy', 'doctrine');
  * @property Hotel $Hotel
  * @property Room $Room
  * @property RoomOccupancyEntity $RoomOccupancyEntity
+ * @property Booking $Booking
  * 
  * @method integer             getHotelId()                  Returns the current record's "hotel_id" value
  * @method integer             getRoomOccupancyEntityId()    Returns the current record's "room_occupancy_entity_id" value
@@ -34,6 +35,7 @@ Doctrine_Manager::getInstance()->bindComponent('RoomOccupancy', 'doctrine');
  * @method Hotel               getHotel()                    Returns the current record's "Hotel" value
  * @method Room                getRoom()                     Returns the current record's "Room" value
  * @method RoomOccupancyEntity getRoomOccupancyEntity()      Returns the current record's "RoomOccupancyEntity" value
+ * @method Booking             getBooking()                  Returns the current record's "Booking" value
  * @method RoomOccupancy       setHotelId()                  Sets the current record's "hotel_id" value
  * @method RoomOccupancy       setRoomOccupancyEntityId()    Sets the current record's "room_occupancy_entity_id" value
  * @method RoomOccupancy       setRoomId()                   Sets the current record's "room_id" value
@@ -47,6 +49,7 @@ Doctrine_Manager::getInstance()->bindComponent('RoomOccupancy', 'doctrine');
  * @method RoomOccupancy       setHotel()                    Sets the current record's "Hotel" value
  * @method RoomOccupancy       setRoom()                     Sets the current record's "Room" value
  * @method RoomOccupancy       setRoomOccupancyEntity()      Sets the current record's "RoomOccupancyEntity" value
+ * @method RoomOccupancy       setBooking()                  Sets the current record's "Booking" value
  * 
  * @package    cms
  * @subpackage model
@@ -109,6 +112,11 @@ abstract class BaseRoomOccupancy extends sfDoctrineRecord
 
         $this->hasOne('RoomOccupancyEntity', array(
              'local' => 'room_occupancy_entity_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
+        $this->hasOne('Booking', array(
+             'local' => 'booking_id',
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
     }

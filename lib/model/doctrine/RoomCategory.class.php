@@ -13,6 +13,7 @@
 class RoomCategory extends BaseRoomCategory
 {
     protected $_prices = array();
+    protected $_currentOccupancyDescription;
     public function loadPrices($date_from, $date_to){
         $q = Q::c('PriceItem', 'pi')
             ->where('pi.room_category_id = ?', $this->id)
@@ -27,5 +28,19 @@ class RoomCategory extends BaseRoomCategory
 
     public function getDayPrice($date){
         return isset($this->_prices[$date]) ? $this->_prices[$date] : false;
+    }
+
+    public function findFreeRoom($arrivalDate, $departureDate){
+        foreach($this->getRooms() as $Room){
+            if($Room->isFree($arrivalDate, $departureDate)){
+                return $Room;
+            }else{
+                $this->_currentOccupancyDescription = $Room->getCurrentOccupancyDescription();
+            }
+        }
+        return false;
+    }
+    public function getCurrentOccupancyDescription(){
+        return $this->_currentOccupancyDescription;
     }
 }

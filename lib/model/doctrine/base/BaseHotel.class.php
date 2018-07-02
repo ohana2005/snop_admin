@@ -9,6 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('Hotel', 'doctrine');
  * 
  * @property integer $admin_id
  * @property string $name
+ * @property string $apihash
  * @property sfGuardUser $Admin
  * @property Doctrine_Collection $ConfigRecords
  * @property Doctrine_Collection $Rooms
@@ -17,9 +18,13 @@ Doctrine_Manager::getInstance()->bindComponent('Hotel', 'doctrine');
  * @property Doctrine_Collection $PriceItems
  * @property Doctrine_Collection $Packages
  * @property Doctrine_Collection $PackageItems
+ * @property Doctrine_Collection $Bookings
+ * @property Doctrine_Collection $BookingRooms
+ * @property Doctrine_Collection $BookingPackages
  * 
  * @method integer             getAdminId()               Returns the current record's "admin_id" value
  * @method string              getName()                  Returns the current record's "name" value
+ * @method string              getApihash()               Returns the current record's "apihash" value
  * @method sfGuardUser         getAdmin()                 Returns the current record's "Admin" value
  * @method Doctrine_Collection getConfigRecords()         Returns the current record's "ConfigRecords" collection
  * @method Doctrine_Collection getRooms()                 Returns the current record's "Rooms" collection
@@ -28,8 +33,12 @@ Doctrine_Manager::getInstance()->bindComponent('Hotel', 'doctrine');
  * @method Doctrine_Collection getPriceItems()            Returns the current record's "PriceItems" collection
  * @method Doctrine_Collection getPackages()              Returns the current record's "Packages" collection
  * @method Doctrine_Collection getPackageItems()          Returns the current record's "PackageItems" collection
+ * @method Doctrine_Collection getBookings()              Returns the current record's "Bookings" collection
+ * @method Doctrine_Collection getBookingRooms()          Returns the current record's "BookingRooms" collection
+ * @method Doctrine_Collection getBookingPackages()       Returns the current record's "BookingPackages" collection
  * @method Hotel               setAdminId()               Sets the current record's "admin_id" value
  * @method Hotel               setName()                  Sets the current record's "name" value
+ * @method Hotel               setApihash()               Sets the current record's "apihash" value
  * @method Hotel               setAdmin()                 Sets the current record's "Admin" value
  * @method Hotel               setConfigRecords()         Sets the current record's "ConfigRecords" collection
  * @method Hotel               setRooms()                 Sets the current record's "Rooms" collection
@@ -38,6 +47,9 @@ Doctrine_Manager::getInstance()->bindComponent('Hotel', 'doctrine');
  * @method Hotel               setPriceItems()            Sets the current record's "PriceItems" collection
  * @method Hotel               setPackages()              Sets the current record's "Packages" collection
  * @method Hotel               setPackageItems()          Sets the current record's "PackageItems" collection
+ * @method Hotel               setBookings()              Sets the current record's "Bookings" collection
+ * @method Hotel               setBookingRooms()          Sets the current record's "BookingRooms" collection
+ * @method Hotel               setBookingPackages()       Sets the current record's "BookingPackages" collection
  * 
  * @package    cms
  * @subpackage model
@@ -56,6 +68,10 @@ abstract class BaseHotel extends sfDoctrineRecord
              'type' => 'string',
              'notnull' => true,
              'length' => 255,
+             ));
+        $this->hasColumn('apihash', 'string', 40, array(
+             'type' => 'string',
+             'length' => 40,
              ));
     }
 
@@ -92,6 +108,18 @@ abstract class BaseHotel extends sfDoctrineRecord
              'foreign' => 'hotel_id'));
 
         $this->hasMany('PackageItem as PackageItems', array(
+             'local' => 'id',
+             'foreign' => 'hotel_id'));
+
+        $this->hasMany('Booking as Bookings', array(
+             'local' => 'id',
+             'foreign' => 'hotel_id'));
+
+        $this->hasMany('BookingRoom as BookingRooms', array(
+             'local' => 'id',
+             'foreign' => 'hotel_id'));
+
+        $this->hasMany('BookingPackage as BookingPackages', array(
              'local' => 'id',
              'foreign' => 'hotel_id'));
 

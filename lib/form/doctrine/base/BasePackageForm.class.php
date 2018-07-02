@@ -47,6 +47,48 @@ abstract class BasePackageForm extends BaseFormDoctrine
       
         
         
+       
+            
+            
+              'min_stay'           => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'max_stay'           => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'min_adults'         => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'max_adults'         => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'min_children'       => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'max_children'       => new sfWidgetFormInputText(),
+      
+        
+        
       'package_items_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'PackageItem')),
     ));
 
@@ -59,6 +101,18 @@ abstract class BasePackageForm extends BaseFormDoctrine
               'name'               => new sfValidatorString(array('max_length' => 255)),
                   
               'description'        => new sfValidatorString(array('required' => false)),
+                  
+              'min_stay'           => new sfValidatorInteger(array('required' => false)),
+                  
+              'max_stay'           => new sfValidatorInteger(array('required' => false)),
+                  
+              'min_adults'         => new sfValidatorInteger(array('required' => false)),
+                  
+              'max_adults'         => new sfValidatorInteger(array('required' => false)),
+                  
+              'min_children'       => new sfValidatorInteger(array('required' => false)),
+                  
+              'max_children'       => new sfValidatorInteger(array('required' => false)),
             'package_items_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'PackageItem', 'required' => false)),
     ));
 

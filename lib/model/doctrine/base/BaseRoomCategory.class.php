@@ -19,31 +19,34 @@ Doctrine_Manager::getInstance()->bindComponent('RoomCategory', 'doctrine');
  * @property Doctrine_Collection $Gallery
  * @property Doctrine_Collection $Rooms
  * @property Doctrine_Collection $PriceItems
+ * @property Doctrine_Collection $BookingRooms
  * 
- * @method integer             getHotelId()     Returns the current record's "hotel_id" value
- * @method string              getName()        Returns the current record's "name" value
- * @method string              getDescription() Returns the current record's "description" value
- * @method integer             getAdults()      Returns the current record's "adults" value
- * @method integer             getChildren()    Returns the current record's "children" value
- * @method integer             getMinPersons()  Returns the current record's "min_persons" value
- * @method integer             getMaxPersons()  Returns the current record's "max_persons" value
- * @method boolean             getIsActive()    Returns the current record's "is_active" value
- * @method Hotel               getHotel()       Returns the current record's "Hotel" value
- * @method Doctrine_Collection getGallery()     Returns the current record's "Gallery" collection
- * @method Doctrine_Collection getRooms()       Returns the current record's "Rooms" collection
- * @method Doctrine_Collection getPriceItems()  Returns the current record's "PriceItems" collection
- * @method RoomCategory        setHotelId()     Sets the current record's "hotel_id" value
- * @method RoomCategory        setName()        Sets the current record's "name" value
- * @method RoomCategory        setDescription() Sets the current record's "description" value
- * @method RoomCategory        setAdults()      Sets the current record's "adults" value
- * @method RoomCategory        setChildren()    Sets the current record's "children" value
- * @method RoomCategory        setMinPersons()  Sets the current record's "min_persons" value
- * @method RoomCategory        setMaxPersons()  Sets the current record's "max_persons" value
- * @method RoomCategory        setIsActive()    Sets the current record's "is_active" value
- * @method RoomCategory        setHotel()       Sets the current record's "Hotel" value
- * @method RoomCategory        setGallery()     Sets the current record's "Gallery" collection
- * @method RoomCategory        setRooms()       Sets the current record's "Rooms" collection
- * @method RoomCategory        setPriceItems()  Sets the current record's "PriceItems" collection
+ * @method integer             getHotelId()      Returns the current record's "hotel_id" value
+ * @method string              getName()         Returns the current record's "name" value
+ * @method string              getDescription()  Returns the current record's "description" value
+ * @method integer             getAdults()       Returns the current record's "adults" value
+ * @method integer             getChildren()     Returns the current record's "children" value
+ * @method integer             getMinPersons()   Returns the current record's "min_persons" value
+ * @method integer             getMaxPersons()   Returns the current record's "max_persons" value
+ * @method boolean             getIsActive()     Returns the current record's "is_active" value
+ * @method Hotel               getHotel()        Returns the current record's "Hotel" value
+ * @method Doctrine_Collection getGallery()      Returns the current record's "Gallery" collection
+ * @method Doctrine_Collection getRooms()        Returns the current record's "Rooms" collection
+ * @method Doctrine_Collection getPriceItems()   Returns the current record's "PriceItems" collection
+ * @method Doctrine_Collection getBookingRooms() Returns the current record's "BookingRooms" collection
+ * @method RoomCategory        setHotelId()      Sets the current record's "hotel_id" value
+ * @method RoomCategory        setName()         Sets the current record's "name" value
+ * @method RoomCategory        setDescription()  Sets the current record's "description" value
+ * @method RoomCategory        setAdults()       Sets the current record's "adults" value
+ * @method RoomCategory        setChildren()     Sets the current record's "children" value
+ * @method RoomCategory        setMinPersons()   Sets the current record's "min_persons" value
+ * @method RoomCategory        setMaxPersons()   Sets the current record's "max_persons" value
+ * @method RoomCategory        setIsActive()     Sets the current record's "is_active" value
+ * @method RoomCategory        setHotel()        Sets the current record's "Hotel" value
+ * @method RoomCategory        setGallery()      Sets the current record's "Gallery" collection
+ * @method RoomCategory        setRooms()        Sets the current record's "Rooms" collection
+ * @method RoomCategory        setPriceItems()   Sets the current record's "PriceItems" collection
+ * @method RoomCategory        setBookingRooms() Sets the current record's "BookingRooms" collection
  * 
  * @package    cms
  * @subpackage model
@@ -115,6 +118,10 @@ abstract class BaseRoomCategory extends sfDoctrineRecord
              'foreign' => 'room_category_id'));
 
         $this->hasMany('PriceItem as PriceItems', array(
+             'local' => 'id',
+             'foreign' => 'room_category_id'));
+
+        $this->hasMany('BookingRoom as BookingRooms', array(
              'local' => 'id',
              'foreign' => 'room_category_id'));
     }

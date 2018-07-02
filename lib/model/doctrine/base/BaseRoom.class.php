@@ -12,17 +12,20 @@ Doctrine_Manager::getInstance()->bindComponent('Room', 'doctrine');
  * @property string $number
  * @property RoomCategory $RoomCategory
  * @property Doctrine_Collection $RoomOccupancyRecords
+ * @property Doctrine_Collection $BookingRooms
  * 
  * @method integer             getHotelId()              Returns the current record's "hotel_id" value
  * @method integer             getRoomCategoryId()       Returns the current record's "room_category_id" value
  * @method string              getNumber()               Returns the current record's "number" value
  * @method RoomCategory        getRoomCategory()         Returns the current record's "RoomCategory" value
  * @method Doctrine_Collection getRoomOccupancyRecords() Returns the current record's "RoomOccupancyRecords" collection
+ * @method Doctrine_Collection getBookingRooms()         Returns the current record's "BookingRooms" collection
  * @method Room                setHotelId()              Sets the current record's "hotel_id" value
  * @method Room                setRoomCategoryId()       Sets the current record's "room_category_id" value
  * @method Room                setNumber()               Sets the current record's "number" value
  * @method Room                setRoomCategory()         Sets the current record's "RoomCategory" value
  * @method Room                setRoomOccupancyRecords() Sets the current record's "RoomOccupancyRecords" collection
+ * @method Room                setBookingRooms()         Sets the current record's "BookingRooms" collection
  * 
  * @package    cms
  * @subpackage model
@@ -58,6 +61,10 @@ abstract class BaseRoom extends sfDoctrineRecord
              'onDelete' => 'CASCADE'));
 
         $this->hasMany('RoomOccupancy as RoomOccupancyRecords', array(
+             'local' => 'id',
+             'foreign' => 'room_id'));
+
+        $this->hasMany('BookingRoom as BookingRooms', array(
              'local' => 'id',
              'foreign' => 'room_id'));
     }

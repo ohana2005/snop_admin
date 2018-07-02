@@ -16,7 +16,7 @@ generator:
       fields: ~
       list:
         table_method: tmListHotel
-        display: [name, Packages]
+        display: [name, _per, is_discount]
       filter:
         display: [name]
       form:

@@ -16,6 +16,12 @@ abstract class BasePackageFormFilter extends BaseFormFilterDoctrine
       'hotel_id'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => true)),
       'name'               => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'description'        => new sfWidgetFormFilterInput(),
+      'min_stay'           => new sfWidgetFormFilterInput(),
+      'max_stay'           => new sfWidgetFormFilterInput(),
+      'min_adults'         => new sfWidgetFormFilterInput(),
+      'max_adults'         => new sfWidgetFormFilterInput(),
+      'min_children'       => new sfWidgetFormFilterInput(),
+      'max_children'       => new sfWidgetFormFilterInput(),
       'package_items_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'PackageItem')),
     ));
 
@@ -23,6 +29,12 @@ abstract class BasePackageFormFilter extends BaseFormFilterDoctrine
       'hotel_id'           => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Hotel'), 'column' => 'id')),
       'name'               => new sfValidatorPass(array('required' => false)),
       'description'        => new sfValidatorPass(array('required' => false)),
+      'min_stay'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'max_stay'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'min_adults'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'max_adults'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'min_children'       => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'max_children'       => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'package_items_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'PackageItem', 'required' => false)),
     ));
 
@@ -66,6 +78,12 @@ abstract class BasePackageFormFilter extends BaseFormFilterDoctrine
       'hotel_id'           => 'ForeignKey',
       'name'               => 'Text',
       'description'        => 'Text',
+      'min_stay'           => 'Number',
+      'max_stay'           => 'Number',
+      'min_adults'         => 'Number',
+      'max_adults'         => 'Number',
+      'min_children'       => 'Number',
+      'max_children'       => 'Number',
       'package_items_list' => 'ManyKey',
     );
   }
