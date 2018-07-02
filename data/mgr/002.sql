@@ -18,3 +18,6 @@ ALTER TABLE package ADD COLUMN     max_children SMALLINT UNSIGNED DEFAULT 99 aft
 
 ALTER TABLE booking ADD COLUMN      summary TEXT after price;
 ALTER TABLE booking ADD COLUMN       hash VARCHAR(40) after summary;
+
+ALTER TABLE hotel ADD COLUMN       admin_lang VARCHAR(10) DEFAULT 'en' after apihash;
+ALTER TABLE hotel ADD COLUMN       booking_langs VARCHAR(255) DEFAULT 'en' after admin_lang;

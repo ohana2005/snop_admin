@@ -19,7 +19,10 @@ class TextBlockTable extends Doctrine_Table
     
     public function tmListNormal(Doctrine_Query $q)
     {
+        return $q;
+        /*
         $a = $q->getRootAlias();
         return $q->addWhere("$a.is_visible_for_admin = ?", true);
+        */
     }
 }

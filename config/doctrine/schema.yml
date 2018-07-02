@@ -35,6 +35,8 @@ Hotel:
     admin_id: integer
     name: {type: string(255), notnull: true}
     apihash: string(40)
+    admin_lang: {type: string(10), default: en}
+    booking_langs: {type: string(255), default: en}
   relations:
     Admin: {class: sfGuardUser, local: admin_id, type: one, foreignType: one, onDelete: CASCADE}
 

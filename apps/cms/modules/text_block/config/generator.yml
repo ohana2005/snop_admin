@@ -24,6 +24,9 @@ generator:
       filter:
         class: false
       form:
+        display:
+          En: [en]
+          Ru: [ru]
         class: TextBlockFormAdmin
         actions:
           _list: ~
