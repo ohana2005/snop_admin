@@ -7,9 +7,9 @@ all:
     attribute_required: false
     siteurl: http://dev
   live_server: ' '
-  testaurus:
+  room_gallery:
     callback: util/imageBuilderWidget
-    image_folder: testaurus
+    image_folder: room_gallery
     image_ext: jpg
     image_field: image
     pdf_folder: pdf
@@ -20,42 +20,11 @@ all:
         height: 120
         method: crop
         ext: .small
-      tiny:
-        width: 127
-        height: 106
+      mid:
+        width: 400
+        height: 300
         method: crop
-        ext: .tiny
-  blog_post:
-    callback: util/imageBuilderWidget
-    image_folder: news
-    image_ext: jpg
-    image_field: image
-    pdf_folder: pdf
-    pdf_field: pdf
-    thumbs:
-      small:
-        width: 150
-        height: 150
-        method: crop
-        ext: .small
-  user_config_settings:
-    callback: util/imageBuilderWidget
-    image_folder: user_config_settings
-    image_ext: jpg
-    image_field: image
-    pdf_folder: pdf
-    pdf_field: pdf
-    thumbs:
-      tiny:
-        width: 50
-        height: 50
-        method: crop
-        ext: .tiny
-      small:
-        width: 120
-        height: 170
-        method: crop
-        ext: .small
+        ext: .mid
   default_image:
     callback: util/imageBuilderWidget
     image_folder: default_image
@@ -77,23 +46,5 @@ all:
       tiny:
         width: 40
         height: 40
-        method: crop
-        ext: .tiny
-  profile:
-    callback: util/imageBuilderWidget
-    image_folder: profile
-    image_ext: jpg
-    image_field: image
-    pdf_folder: pdf
-    pdf_field: pdf
-    thumbs:
-      small:
-        width: 160
-        height: 160
-        method: crop
-        ext: .small
-      tiny:
-        width: 80
-        height: 80
         method: crop
         ext: .tiny

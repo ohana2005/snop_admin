@@ -1,13 +1,13 @@
 generator:
   class: myDoctrineGenerator
   param:
-    model_class:           RoomCategory
+    model_class:           RoomGallery
     theme:                 my_admin_lanceng
     non_verbose_templates: true
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          room_category
+    route_prefix:          room_gallery
     with_doctrine_route:   true
     actions_base_class:    sfActions
 
@@ -15,22 +15,12 @@ generator:
       actions: ~
       fields:  ~
       list:
-        table_method: tmListHotel
-        display: [name, adults, children, ;is_active]
         batch_actions: {}
-        object_actions:
-          gallery: {label: '<i class="fa fa-picture-o"></i>', action: gallery, params: {class: 'btn btn-default', title: 'Gallery'}}
-          occupancy: {label: '<i class="fa fa-cloud"></i>', action: occupancy, params: {class: 'btn btn-default', title: 'Occupancy'}}
-          _edit: ~
-          _delete: ~
+        display: [RoomCategory, _image]
+        table_method: tmListHotel
       filter:
-        display: [name]
-      form:
-        class: RoomCategoryFormHotel
-        display:
-          Settings: [adults, children, min_persons, max_persons, is_active]
-          En: [en]
-          Ru: [ru]
+        display: [room_category_id]
+      form:    ~
       edit:    ~
       new:     ~
       

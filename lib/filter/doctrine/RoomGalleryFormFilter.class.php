@@ -12,5 +12,8 @@ class RoomGalleryFormFilter extends BaseRoomGalleryFormFilter
 {
   public function configure()
   {
+      $this->hotelize('room_category_id', 'RoomCategory', true)
+          ->setOption('add_empty', false)
+          ;
   }
 }

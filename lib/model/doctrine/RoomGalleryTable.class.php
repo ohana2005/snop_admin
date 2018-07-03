@@ -16,4 +16,11 @@ class RoomGalleryTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('RoomGallery');
     }
+
+    public function tmListHotel(Doctrine_Query $q){
+        $a = $q->getRootAlias();
+        $q->innerJoin("$a.RoomCategory rc");
+        $q->leftJoin("rc.Translation t WITH t.lang = ?", sfContext::getInstance()->getUser()->getCulture());
+        return $q;
+    }
 }

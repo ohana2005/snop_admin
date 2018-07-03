@@ -215,4 +215,14 @@ class BaseForm extends sfFormSymfony {
         $this->widgetSchema[$name]->setOption('disabled', true);
     }
 
+    public function hotelize($name, $model, $langize = false){
+        $q = Q::c($model, 'a')
+            ->where('a.hotel_id = ?', $this->getUser()->getHotelId());
+        if($langize){
+            $q->leftJoin('a.Translation t WITH t.lang = ?', $this->getUser()->getCulture());
+        }
+        $this->widgetSchema[$name]->setOption('query', $q);
+        return $this->widgetSchema[$name];
+    }
+
 }
