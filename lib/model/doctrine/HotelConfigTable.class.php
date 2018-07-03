@@ -20,6 +20,10 @@ class HotelConfigTable extends Doctrine_Table
     public function tmListHotel(Doctrine_Query $q) {
         $a = $q->getRootAlias();
         $q->andWhere("$a.hotel_id = ?", sfContext::getInstance()->getUser()->getHotelId());
+        //if not developer
+        // $q->andWhere("$a.is_hidden = ?", false);
+
+        //endif
         return $q;
     }
 }
