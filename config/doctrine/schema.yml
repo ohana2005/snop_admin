@@ -35,6 +35,8 @@ Hotel:
     admin_id: integer
     name: {type: string(255), notnull: true}
     apihash: string(40)
+    admin_lang: {type: string(10), default: en}
+    booking_langs: {type: string(255), default: en}
   relations:
     Admin: {class: sfGuardUser, local: admin_id, type: one, foreignType: one, onDelete: CASCADE}
 
@@ -52,6 +54,9 @@ HotelConfig:
 
 RoomCategory:
   connection: doctrine
+  actAs:
+    I18n:
+      fields: [name, description]
   columns:
     hotel_id: {type: integer, notnull: true}
     name: {type: string(255), notnull: true}
@@ -129,6 +134,9 @@ PriceItem:
 
 Package:
   connection: doctrine
+  actAs:
+    I18n:
+      fields: [name, description]
   columns:
     hotel_id: {type: integer, notnull: true}
     name: {type: string(255), notnull: true}

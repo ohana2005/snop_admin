@@ -26,6 +26,10 @@ generator:
         display: [name]
       form:
         class: RoomCategoryFormHotel
+        display:
+          Settings: [adults, children, min_persons, max_persons, is_active]
+          En: [en]
+          Ru: [ru]
       edit:    ~
       new:     ~
       

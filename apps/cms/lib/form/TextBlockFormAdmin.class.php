@@ -14,11 +14,14 @@
 class TextBlockFormAdmin extends BaseTextBlockForm{
     
     public function configure() {
-        $this->useFields(array(
-           'name', 'text' 
-        ));
-        
+
+
+        $this->embedI18n(array('en', 'ru'));
+
+        $this->useFields(['en', 'ru']);
+        /*
         $this->noEditor(array('text'));
+        */
     }
     
 }

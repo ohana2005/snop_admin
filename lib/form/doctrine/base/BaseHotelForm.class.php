@@ -22,35 +22,49 @@ abstract class BaseHotelForm extends BaseFormDoctrine
        
             
             
-              'id'       => new sfWidgetFormInputHidden(),
+              'id'            => new sfWidgetFormInputHidden(),
       
         
         
        
             
             
-              'admin_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'add_empty' => true)),
+              'admin_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'add_empty' => true)),
       
         
         
        
             
             
-              'name'     => new sfWidgetFormInputText(),
+              'name'          => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'apihash'  => new sfWidgetFormInputText(),
+              'apihash'       => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'slug'     => new sfWidgetFormInputText(),
+              'admin_lang'    => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'booking_langs' => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'slug'          => new sfWidgetFormInputText(),
       
         
         
@@ -58,15 +72,19 @@ abstract class BaseHotelForm extends BaseFormDoctrine
 
     $this->setValidators(array(
             
-              'id'       => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+              'id'            => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
                   
-              'admin_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'required' => false)),
+              'admin_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'required' => false)),
                   
-              'name'     => new sfValidatorString(array('max_length' => 255)),
+              'name'          => new sfValidatorString(array('max_length' => 255)),
                   
-              'apihash'  => new sfValidatorString(array('max_length' => 40, 'required' => false)),
+              'apihash'       => new sfValidatorString(array('max_length' => 40, 'required' => false)),
                   
-              'slug'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+              'admin_lang'    => new sfValidatorString(array('max_length' => 10, 'required' => false)),
+                  
+              'booking_langs' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+                  
+              'slug'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),
           ));
 
     $this->validatorSchema->setPostValidator(

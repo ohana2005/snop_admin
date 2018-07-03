@@ -17,9 +17,15 @@ class TextBlockTable extends Doctrine_Table
         return Doctrine_Core::getTable('TextBlock');
     }
     
-    public function tmListNormal(Doctrine_Query $q)
+    public function tmListFrontend(Doctrine_Query $q)
     {
         $a = $q->getRootAlias();
-        return $q->addWhere("$a.is_visible_for_admin = ?", true);
+        return $q->addWhere("$a.application = ?", 'frontend');
+    }
+
+    public function tmListCms(Doctrine_Query $q)
+    {
+        $a = $q->getRootAlias();
+        return $q->addWhere("$a.application = ?", 'cms');
     }
 }

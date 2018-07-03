@@ -1,9 +1,9 @@
 <?php
 
 /**
- * RoomCategory form base class.
+ * RoomCategoryTranslation form base class.
  * sfDoctrineFormGenerator 
- * @method RoomCategory getObject() Returns the current form's model object
+ * @method RoomCategoryTranslation getObject() Returns the current form's model object
  *
  * @package    cms
  * @subpackage form
@@ -14,7 +14,7 @@
    
    
  
-abstract class BaseRoomCategoryForm extends BaseFormDoctrine
+abstract class BaseRoomCategoryTranslationForm extends BaseFormDoctrine
 {
   public function setup()
   {
@@ -29,42 +29,21 @@ abstract class BaseRoomCategoryForm extends BaseFormDoctrine
        
             
             
-              'hotel_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => false)),
+              'name'        => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'adults'      => new sfWidgetFormInputText(),
+              'description' => new sfWidgetFormTextarea(),
       
         
         
        
             
             
-              'children'    => new sfWidgetFormInputText(),
-      
-        
-        
-       
-            
-            
-              'min_persons' => new sfWidgetFormInputText(),
-      
-        
-        
-       
-            
-            
-              'max_persons' => new sfWidgetFormInputText(),
-      
-        
-        
-       
-            
-            
-              'is_active'   => new sfWidgetFormInputCheckbox(),
+              'lang'        => new sfWidgetFormInputHidden(),
       
         
         
@@ -74,20 +53,14 @@ abstract class BaseRoomCategoryForm extends BaseFormDoctrine
             
               'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
                   
-              'hotel_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'))),
+              'name'        => new sfValidatorString(array('max_length' => 255)),
                   
-              'adults'      => new sfValidatorInteger(),
+              'description' => new sfValidatorString(array('required' => false)),
                   
-              'children'    => new sfValidatorInteger(array('required' => false)),
-                  
-              'min_persons' => new sfValidatorInteger(),
-                  
-              'max_persons' => new sfValidatorInteger(),
-                  
-              'is_active'   => new sfValidatorBoolean(array('required' => false)),
+              'lang'        => new sfValidatorChoice(array('choices' => array($this->getObject()->get('lang')), 'empty_value' => $this->getObject()->get('lang'), 'required' => false)),
           ));
 
-    $this->widgetSchema->setNameFormat('room_category[%s]');
+    $this->widgetSchema->setNameFormat('room_category_translation[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
@@ -103,7 +76,7 @@ abstract class BaseRoomCategoryForm extends BaseFormDoctrine
 
   public function getModelName()
   {
-    return 'RoomCategory';
+    return 'RoomCategoryTranslation';
   }
     public function updateObject($values = null)
     {

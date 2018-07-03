@@ -7,7 +7,7 @@ generator:
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          text_block
+    route_prefix:          text_block_text_block_cms
     with_doctrine_route:   true
     actions_base_class:    sfActions
 
@@ -15,12 +15,12 @@ generator:
       actions: ~
       fields:  ~
       list:
-        table_method: tmListFrontend
+        table_method: tmListCms
         actions: {}
         batch_actions: {}
         object_actions:
           _edit: ~
-        display: [name, text]          
+        display: [name, text]
       filter:
         display: [name]
       form:
@@ -57,3 +57,11 @@ generator:
 #          selloff:
 #            toggler: selloff_enabled
 #            fields: [selloff_price, selloff_end_date]
+#           #reverse: true
+#        showhide_selects:
+#          type:
+#            toggler: type
+#            values:
+#              default: []
+#              articles: [articles]
+#              category: [category_discount, categories_list]

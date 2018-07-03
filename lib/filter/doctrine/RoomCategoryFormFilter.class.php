@@ -12,5 +12,7 @@ class RoomCategoryFormFilter extends BaseRoomCategoryFormFilter
 {
   public function configure()
   {
+      $this->widgetSchema['name'] = new sfWidgetFormInputText;
+      $this->validatorSchema['name'] = new sfValidatorString(['required' => false]);
   }
 }

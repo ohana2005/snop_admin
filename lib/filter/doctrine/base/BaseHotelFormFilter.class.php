@@ -13,17 +13,21 @@ abstract class BaseHotelFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'admin_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'add_empty' => true)),
-      'name'     => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'apihash'  => new sfWidgetFormFilterInput(),
-      'slug'     => new sfWidgetFormFilterInput(),
+      'admin_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Admin'), 'add_empty' => true)),
+      'name'          => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'apihash'       => new sfWidgetFormFilterInput(),
+      'admin_lang'    => new sfWidgetFormFilterInput(),
+      'booking_langs' => new sfWidgetFormFilterInput(),
+      'slug'          => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
-      'admin_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Admin'), 'column' => 'id')),
-      'name'     => new sfValidatorPass(array('required' => false)),
-      'apihash'  => new sfValidatorPass(array('required' => false)),
-      'slug'     => new sfValidatorPass(array('required' => false)),
+      'admin_id'      => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Admin'), 'column' => 'id')),
+      'name'          => new sfValidatorPass(array('required' => false)),
+      'apihash'       => new sfValidatorPass(array('required' => false)),
+      'admin_lang'    => new sfValidatorPass(array('required' => false)),
+      'booking_langs' => new sfValidatorPass(array('required' => false)),
+      'slug'          => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('hotel_filters[%s]');
@@ -44,11 +48,13 @@ abstract class BaseHotelFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'       => 'Number',
-      'admin_id' => 'ForeignKey',
-      'name'     => 'Text',
-      'apihash'  => 'Text',
-      'slug'     => 'Text',
+      'id'            => 'Number',
+      'admin_id'      => 'ForeignKey',
+      'name'          => 'Text',
+      'apihash'       => 'Text',
+      'admin_lang'    => 'Text',
+      'booking_langs' => 'Text',
+      'slug'          => 'Text',
     );
   }
 }

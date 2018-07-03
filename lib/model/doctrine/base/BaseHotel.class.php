@@ -10,6 +10,8 @@ Doctrine_Manager::getInstance()->bindComponent('Hotel', 'doctrine');
  * @property integer $admin_id
  * @property string $name
  * @property string $apihash
+ * @property string $admin_lang
+ * @property string $booking_langs
  * @property sfGuardUser $Admin
  * @property Doctrine_Collection $ConfigRecords
  * @property Doctrine_Collection $Rooms
@@ -25,6 +27,8 @@ Doctrine_Manager::getInstance()->bindComponent('Hotel', 'doctrine');
  * @method integer             getAdminId()               Returns the current record's "admin_id" value
  * @method string              getName()                  Returns the current record's "name" value
  * @method string              getApihash()               Returns the current record's "apihash" value
+ * @method string              getAdminLang()             Returns the current record's "admin_lang" value
+ * @method string              getBookingLangs()          Returns the current record's "booking_langs" value
  * @method sfGuardUser         getAdmin()                 Returns the current record's "Admin" value
  * @method Doctrine_Collection getConfigRecords()         Returns the current record's "ConfigRecords" collection
  * @method Doctrine_Collection getRooms()                 Returns the current record's "Rooms" collection
@@ -39,6 +43,8 @@ Doctrine_Manager::getInstance()->bindComponent('Hotel', 'doctrine');
  * @method Hotel               setAdminId()               Sets the current record's "admin_id" value
  * @method Hotel               setName()                  Sets the current record's "name" value
  * @method Hotel               setApihash()               Sets the current record's "apihash" value
+ * @method Hotel               setAdminLang()             Sets the current record's "admin_lang" value
+ * @method Hotel               setBookingLangs()          Sets the current record's "booking_langs" value
  * @method Hotel               setAdmin()                 Sets the current record's "Admin" value
  * @method Hotel               setConfigRecords()         Sets the current record's "ConfigRecords" collection
  * @method Hotel               setRooms()                 Sets the current record's "Rooms" collection
@@ -72,6 +78,16 @@ abstract class BaseHotel extends sfDoctrineRecord
         $this->hasColumn('apihash', 'string', 40, array(
              'type' => 'string',
              'length' => 40,
+             ));
+        $this->hasColumn('admin_lang', 'string', 10, array(
+             'type' => 'string',
+             'default' => 'en',
+             'length' => 10,
+             ));
+        $this->hasColumn('booking_langs', 'string', 255, array(
+             'type' => 'string',
+             'default' => 'en',
+             'length' => 255,
              ));
     }
 
