@@ -14,8 +14,6 @@ abstract class BasePackageFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'hotel_id'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => true)),
-      'name'               => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'description'        => new sfWidgetFormFilterInput(),
       'min_stay'           => new sfWidgetFormFilterInput(),
       'max_stay'           => new sfWidgetFormFilterInput(),
       'min_adults'         => new sfWidgetFormFilterInput(),
@@ -27,8 +25,6 @@ abstract class BasePackageFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'hotel_id'           => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Hotel'), 'column' => 'id')),
-      'name'               => new sfValidatorPass(array('required' => false)),
-      'description'        => new sfValidatorPass(array('required' => false)),
       'min_stay'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'max_stay'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'min_adults'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
@@ -76,8 +72,6 @@ abstract class BasePackageFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'                 => 'Number',
       'hotel_id'           => 'ForeignKey',
-      'name'               => 'Text',
-      'description'        => 'Text',
       'min_stay'           => 'Number',
       'max_stay'           => 'Number',
       'min_adults'         => 'Number',

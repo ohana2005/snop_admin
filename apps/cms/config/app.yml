@@ -12,9 +12,12 @@ all:
           Default Image:
             icon: picture
             url:          default_image
-          Text Blocks:
+          Text Booking:
             icon: file-text              
             url:          text_block
+          Text Cms:
+            icon: file-text
+            url:          text_block_cms/index
       Hotels:
         url: 'hotel/index'
         icon: user

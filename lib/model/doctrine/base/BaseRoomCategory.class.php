@@ -124,5 +124,14 @@ abstract class BaseRoomCategory extends sfDoctrineRecord
         $this->hasMany('BookingRoom as BookingRooms', array(
              'local' => 'id',
              'foreign' => 'room_category_id'));
+
+        $i18n0 = new Doctrine_Template_I18n(array(
+             'fields' => 
+             array(
+              0 => 'name',
+              1 => 'description',
+             ),
+             ));
+        $this->actAs($i18n0);
     }
 }

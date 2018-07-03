@@ -32,6 +32,7 @@ class TextHelper {
                 self::$data[$block['name']] = $block['Translation'][$cult]['text'];
             }
         }
+
         return self::$data;
     }
 
@@ -51,7 +52,7 @@ class TextHelper {
     }
 
     public static function __($text, $replacements = array(), $compat = null) {
-        if(sfContext::getInstance()->getConfiguration()->getApplication() == 'frontend'){
+        if(sfContext::getInstance()->getConfiguration()->getApplication() == 'cms'){
             return self::getByKey($text, $replacements);
         }
         return strtr($text, $replacements);
@@ -64,14 +65,20 @@ class TextHelper {
 
     protected static function addByKey($key, $text) {
         myLog::write($key);
-        $block = new TextBlock;
-        $block->fromArray(array(
-            'name' => $key,
-            'text' => $text,
-            'application' => sfContext::getInstance()->getConfiguration()->getApplication()
-        ));
-        $block->save();
-        self::$data[$key] = $text;
+        $q = Q::c('TextBlock', 'b')
+            ->where('b.application = ?', sfContext::getInstance()->getConfiguration()->getApplication())
+            ->andWhere('b.name = ?', $key)
+            ;
+        if(!$q->count()) {
+            $block = new TextBlock;
+            $block->fromArray(array(
+                'name' => $key,
+                'text' => $text,
+                'application' => sfContext::getInstance()->getConfiguration()->getApplication()
+            ));
+            $block->save();
+            self::$data[$key] = $text;
+        }
     }
 
     public static function normalize($value) {

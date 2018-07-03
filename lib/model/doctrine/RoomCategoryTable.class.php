@@ -21,6 +21,7 @@ class RoomCategoryTable extends Doctrine_Table
     public function tmListHotel(Doctrine_Query $q) {
         $a = $q->getRootAlias();
         $q->andWhere("$a.hotel_id = ?", sfContext::getInstance()->getUser()->getHotelId());
+        $q->leftJoin("$a.Translation t WITH t.lang = ?", sfContext::getInstance()->getUser()->getCulture());
         return $q;
     }
 }

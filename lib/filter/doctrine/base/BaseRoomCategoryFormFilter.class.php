@@ -14,8 +14,6 @@ abstract class BaseRoomCategoryFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'hotel_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => true)),
-      'name'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'description' => new sfWidgetFormFilterInput(),
       'adults'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'children'    => new sfWidgetFormFilterInput(),
       'min_persons' => new sfWidgetFormFilterInput(array('with_empty' => false)),
@@ -25,8 +23,6 @@ abstract class BaseRoomCategoryFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'hotel_id'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Hotel'), 'column' => 'id')),
-      'name'        => new sfValidatorPass(array('required' => false)),
-      'description' => new sfValidatorPass(array('required' => false)),
       'adults'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'children'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'min_persons' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
@@ -54,8 +50,6 @@ abstract class BaseRoomCategoryFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'          => 'Number',
       'hotel_id'    => 'ForeignKey',
-      'name'        => 'Text',
-      'description' => 'Text',
       'adults'      => 'Number',
       'children'    => 'Number',
       'min_persons' => 'Number',

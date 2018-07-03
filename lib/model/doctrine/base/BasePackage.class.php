@@ -129,5 +129,14 @@ abstract class BasePackage extends sfDoctrineRecord
         $this->hasMany('BookingPackage as BookingPackages', array(
              'local' => 'id',
              'foreign' => 'package_id'));
+
+        $i18n0 = new Doctrine_Template_I18n(array(
+             'fields' => 
+             array(
+              0 => 'name',
+              1 => 'description',
+             ),
+             ));
+        $this->actAs($i18n0);
     }
 }

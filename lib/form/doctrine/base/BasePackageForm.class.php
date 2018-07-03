@@ -36,20 +36,6 @@ abstract class BasePackageForm extends BaseFormDoctrine
        
             
             
-              'name'               => new sfWidgetFormInputText(),
-      
-        
-        
-       
-            
-            
-              'description'        => new sfWidgetFormTextarea(),
-      
-        
-        
-       
-            
-            
               'min_stay'           => new sfWidgetFormInputText(),
       
         
@@ -97,10 +83,6 @@ abstract class BasePackageForm extends BaseFormDoctrine
               'id'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
                   
               'hotel_id'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'))),
-                  
-              'name'               => new sfValidatorString(array('max_length' => 255)),
-                  
-              'description'        => new sfValidatorString(array('required' => false)),
                   
               'min_stay'           => new sfValidatorInteger(array('required' => false)),
                   

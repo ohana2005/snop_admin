@@ -54,6 +54,9 @@ HotelConfig:
 
 RoomCategory:
   connection: doctrine
+  actAs:
+    I18n:
+      fields: [name, description]
   columns:
     hotel_id: {type: integer, notnull: true}
     name: {type: string(255), notnull: true}
@@ -131,6 +134,9 @@ PriceItem:
 
 Package:
   connection: doctrine
+  actAs:
+    I18n:
+      fields: [name, description]
   columns:
     hotel_id: {type: integer, notnull: true}
     name: {type: string(255), notnull: true}
