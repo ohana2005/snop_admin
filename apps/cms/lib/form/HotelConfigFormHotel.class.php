@@ -11,7 +11,7 @@ class HotelConfigFormHotel extends HotelConfigForm
     public function configure() {
 
         $this->useFields(array('keyname', 'value'));
-        $textareas = array( 'hotel_css');
+        $textareas = array( 'css');
 
         if($this->getObject()->datatype == 'enum'){
             $this->widgetSchema['value'] = new sfWidgetFormChoice(array(

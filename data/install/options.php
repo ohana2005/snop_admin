@@ -12,6 +12,7 @@
         ['telephone', 1, 'string', null, ''],
         ['terms_and_conditions', 1, 'string', null, ''],
         ['privacy_policy', 1, 'string', null, ''],
+        ['css', 1, 'string', null, ''],
     ];
 
     return $_options;
