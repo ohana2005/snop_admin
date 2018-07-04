@@ -8,3 +8,5 @@
 /web/uploads
 /Archive.zip
 /vendor
+.DS_Store
+web/.DS_Store
