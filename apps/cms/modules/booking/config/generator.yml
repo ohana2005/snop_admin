@@ -1,29 +1,30 @@
 generator:
   class: myDoctrineGenerator
   param:
-    model_class:           Hotel
+    model_class:           Booking
     theme:                 my_admin_lanceng
     non_verbose_templates: true
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          hotel
+    route_prefix:          booking
     with_doctrine_route:   true
     actions_base_class:    sfActions
 
     config:
       actions: ~
-      fields:  ~
+      fields:
+        date_arrival: {renderer: project_date}
       list:
-        display: [name, slug, admin_id]
+        table_method: tmListHotel
+        sort: [date_arrival, desc]
+        display: [guest_name, guest_email, date_arrival, nights, price]
         object_actions:
-          geturl: {label: Script, action: getscript, params: {class: 'btn btn-default system_popup_link', style: 'font-size: 10px'}}
-          login: {label: '<i class="fa fa-key"></i>', action: loginAs, params: {class: 'btn btn-default', title: 'Login as'}}
-          admin: {label: '<i class="fa fa-user"></i>', action: admin, params: {class: 'btn btn-default', title: 'Admin'}}
-          _edit: ~
           _delete: ~
+        batch_actions: {}
+        actions: {}
       filter:
-        display: [name]
+        display: [guest_name, guest_email, guest_telephone]
       form:    ~
       edit:    ~
       new:     ~

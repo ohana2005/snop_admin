@@ -20,6 +20,7 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * @property float $price
  * @property string $summary
  * @property string $hash
+ * @property enum $payment_status
  * @property Hotel $Hotel
  * @property Doctrine_Collection $RoomOccupancyRecords
  * @property Doctrine_Collection $RoomOccupancyEntities
@@ -39,6 +40,7 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * @method float               getPrice()                 Returns the current record's "price" value
  * @method string              getSummary()               Returns the current record's "summary" value
  * @method string              getHash()                  Returns the current record's "hash" value
+ * @method enum                getPaymentStatus()         Returns the current record's "payment_status" value
  * @method Hotel               getHotel()                 Returns the current record's "Hotel" value
  * @method Doctrine_Collection getRoomOccupancyRecords()  Returns the current record's "RoomOccupancyRecords" collection
  * @method Doctrine_Collection getRoomOccupancyEntities() Returns the current record's "RoomOccupancyEntities" collection
@@ -57,6 +59,7 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * @method Booking             setPrice()                 Sets the current record's "price" value
  * @method Booking             setSummary()               Sets the current record's "summary" value
  * @method Booking             setHash()                  Sets the current record's "hash" value
+ * @method Booking             setPaymentStatus()         Sets the current record's "payment_status" value
  * @method Booking             setHotel()                 Sets the current record's "Hotel" value
  * @method Booking             setRoomOccupancyRecords()  Sets the current record's "RoomOccupancyRecords" collection
  * @method Booking             setRoomOccupancyEntities() Sets the current record's "RoomOccupancyEntities" collection
@@ -129,6 +132,17 @@ abstract class BaseBooking extends sfDoctrineRecord
              'type' => 'string',
              'length' => 40,
              ));
+        $this->hasColumn('payment_status', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'pending',
+              1 => 'paid',
+              2 => 'cancelled',
+              3 => 'nopayment',
+             ),
+             'default' => 'nopayment',
+             ));
     }
 
     public function setUp()
@@ -157,6 +171,9 @@ abstract class BaseBooking extends sfDoctrineRecord
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
+        $backendviewed0 = new Doctrine_Template_BackendViewed(array(
+             ));
         $this->actAs($timestampable0);
+        $this->actAs($backendviewed0);
     }
 }

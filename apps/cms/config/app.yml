@@ -56,3 +56,7 @@ all:
           Child Categories:
             url: child_category
             icon: gear
+      Bookings:
+        icon: bars
+        url: booking
+        new_messages: Booking

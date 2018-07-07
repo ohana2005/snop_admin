@@ -21,10 +21,8 @@ class utilComponents extends sfComponents{
             case 'SiteEvent':
                 $q = Doctrine::getTable('SiteEvent')->tmList($q);
                 break;
-            case 'QuizzTake':
-                $q = Q::c('QuizzTake', 'a')
-                        ->innerJoin('a.Quizz q')
-                        ->where('q.user_id = ?', sfContext::getInstance()->getUser()->getGuardUser()->id)
+            case 'Booking':
+                $q = Doctrine::getTable('Booking')->tmListHotel($q);
                     ;
                 break;
             default:          

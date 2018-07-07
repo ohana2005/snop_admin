@@ -5,6 +5,7 @@
 /snop.sql
 /config/databases.yml
 /config/symfony.php
+/config/env.php
 /web/uploads
 /Archive.zip
 /vendor
