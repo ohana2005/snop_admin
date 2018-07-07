@@ -49,6 +49,7 @@ HotelConfig:
     datatype: {type: string(32), default: 'string'}
     label: {type: string(255)}
     value: {type: string(255)}
+    is_hidden: {type: boolean, default: false}
   relations:
     Hotel: {foreignAlias: ConfigRecords, onDelete: CASCADE}
 

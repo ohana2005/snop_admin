@@ -21,3 +21,6 @@ ALTER TABLE booking ADD COLUMN       hash VARCHAR(40) after summary;
 
 ALTER TABLE hotel ADD COLUMN       admin_lang VARCHAR(10) DEFAULT 'en' after apihash;
 ALTER TABLE hotel ADD COLUMN       booking_langs VARCHAR(255) DEFAULT 'en' after admin_lang;
+
+
+ALTER TABLE hotel_config ADD COLUMN is_hidden TINYINT(1) DEFAULT '0';

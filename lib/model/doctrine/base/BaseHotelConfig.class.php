@@ -13,22 +13,25 @@ Doctrine_Manager::getInstance()->bindComponent('HotelConfig', 'doctrine');
  * @property string $datatype
  * @property string $label
  * @property string $value
+ * @property boolean $is_hidden
  * @property Hotel $Hotel
  * 
- * @method integer     getHotelId()  Returns the current record's "hotel_id" value
- * @method string      getKeyname()  Returns the current record's "keyname" value
- * @method integer     getSection()  Returns the current record's "section" value
- * @method string      getDatatype() Returns the current record's "datatype" value
- * @method string      getLabel()    Returns the current record's "label" value
- * @method string      getValue()    Returns the current record's "value" value
- * @method Hotel       getHotel()    Returns the current record's "Hotel" value
- * @method HotelConfig setHotelId()  Sets the current record's "hotel_id" value
- * @method HotelConfig setKeyname()  Sets the current record's "keyname" value
- * @method HotelConfig setSection()  Sets the current record's "section" value
- * @method HotelConfig setDatatype() Sets the current record's "datatype" value
- * @method HotelConfig setLabel()    Sets the current record's "label" value
- * @method HotelConfig setValue()    Sets the current record's "value" value
- * @method HotelConfig setHotel()    Sets the current record's "Hotel" value
+ * @method integer     getHotelId()   Returns the current record's "hotel_id" value
+ * @method string      getKeyname()   Returns the current record's "keyname" value
+ * @method integer     getSection()   Returns the current record's "section" value
+ * @method string      getDatatype()  Returns the current record's "datatype" value
+ * @method string      getLabel()     Returns the current record's "label" value
+ * @method string      getValue()     Returns the current record's "value" value
+ * @method boolean     getIsHidden()  Returns the current record's "is_hidden" value
+ * @method Hotel       getHotel()     Returns the current record's "Hotel" value
+ * @method HotelConfig setHotelId()   Sets the current record's "hotel_id" value
+ * @method HotelConfig setKeyname()   Sets the current record's "keyname" value
+ * @method HotelConfig setSection()   Sets the current record's "section" value
+ * @method HotelConfig setDatatype()  Sets the current record's "datatype" value
+ * @method HotelConfig setLabel()     Sets the current record's "label" value
+ * @method HotelConfig setValue()     Sets the current record's "value" value
+ * @method HotelConfig setIsHidden()  Sets the current record's "is_hidden" value
+ * @method HotelConfig setHotel()     Sets the current record's "Hotel" value
  * 
  * @package    cms
  * @subpackage model
@@ -67,6 +70,10 @@ abstract class BaseHotelConfig extends sfDoctrineRecord
         $this->hasColumn('value', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
+             ));
+        $this->hasColumn('is_hidden', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => false,
              ));
     }
 

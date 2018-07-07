@@ -22,49 +22,56 @@ abstract class BaseHotelConfigForm extends BaseFormDoctrine
        
             
             
-              'id'       => new sfWidgetFormInputHidden(),
+              'id'        => new sfWidgetFormInputHidden(),
       
         
         
        
             
             
-              'hotel_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => false)),
+              'hotel_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => false)),
       
         
         
        
             
             
-              'keyname'  => new sfWidgetFormInputText(),
+              'keyname'   => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'section'  => new sfWidgetFormInputText(),
+              'section'   => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'datatype' => new sfWidgetFormInputText(),
+              'datatype'  => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'label'    => new sfWidgetFormInputText(),
+              'label'     => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'value'    => new sfWidgetFormInputText(),
+              'value'     => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'is_hidden' => new sfWidgetFormInputCheckbox(),
       
         
         
@@ -72,19 +79,21 @@ abstract class BaseHotelConfigForm extends BaseFormDoctrine
 
     $this->setValidators(array(
             
-              'id'       => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+              'id'        => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
                   
-              'hotel_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'))),
+              'hotel_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'))),
                   
-              'keyname'  => new sfValidatorString(array('max_length' => 32)),
+              'keyname'   => new sfValidatorString(array('max_length' => 32)),
                   
-              'section'  => new sfValidatorInteger(array('required' => false)),
+              'section'   => new sfValidatorInteger(array('required' => false)),
                   
-              'datatype' => new sfValidatorString(array('max_length' => 32, 'required' => false)),
+              'datatype'  => new sfValidatorString(array('max_length' => 32, 'required' => false)),
                   
-              'label'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+              'label'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   
-              'value'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+              'value'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+                  
+              'is_hidden' => new sfValidatorBoolean(array('required' => false)),
           ));
 
     $this->widgetSchema->setNameFormat('hotel_config[%s]');
