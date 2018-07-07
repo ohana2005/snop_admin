@@ -127,6 +127,13 @@ abstract class BaseBookingForm extends BaseFormDoctrine
        
             
             
+              'lang'              => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
               'created_at'        => new sfWidgetFormDateTime(),
       
         
@@ -178,6 +185,8 @@ abstract class BaseBookingForm extends BaseFormDoctrine
               'hash'              => new sfValidatorString(array('max_length' => 40, 'required' => false)),
                   
               'payment_status'    => new sfValidatorChoice(array('choices' => array(0 => 'pending', 1 => 'paid', 2 => 'cancelled', 3 => 'nopayment'), 'required' => false)),
+                  
+              'lang'              => new sfValidatorString(array('max_length' => 2, 'required' => false)),
                   
               'created_at'        => new sfValidatorDateTime(),
                   

@@ -13,4 +13,8 @@ require_once dirname(__FILE__).'/../lib/bookingGeneratorHelper.class.php';
  */
 class bookingActions extends autoBookingActions
 {
+    public function executeInfo(sfWebRequest $request)
+    {
+        $this->Booking = $this->getRoute()->getObject();
+    }
 }

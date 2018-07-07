@@ -21,6 +21,7 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * @property string $summary
  * @property string $hash
  * @property enum $payment_status
+ * @property string $lang
  * @property Hotel $Hotel
  * @property Doctrine_Collection $RoomOccupancyRecords
  * @property Doctrine_Collection $RoomOccupancyEntities
@@ -41,6 +42,7 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * @method string              getSummary()               Returns the current record's "summary" value
  * @method string              getHash()                  Returns the current record's "hash" value
  * @method enum                getPaymentStatus()         Returns the current record's "payment_status" value
+ * @method string              getLang()                  Returns the current record's "lang" value
  * @method Hotel               getHotel()                 Returns the current record's "Hotel" value
  * @method Doctrine_Collection getRoomOccupancyRecords()  Returns the current record's "RoomOccupancyRecords" collection
  * @method Doctrine_Collection getRoomOccupancyEntities() Returns the current record's "RoomOccupancyEntities" collection
@@ -60,6 +62,7 @@ Doctrine_Manager::getInstance()->bindComponent('Booking', 'doctrine');
  * @method Booking             setSummary()               Sets the current record's "summary" value
  * @method Booking             setHash()                  Sets the current record's "hash" value
  * @method Booking             setPaymentStatus()         Sets the current record's "payment_status" value
+ * @method Booking             setLang()                  Sets the current record's "lang" value
  * @method Booking             setHotel()                 Sets the current record's "Hotel" value
  * @method Booking             setRoomOccupancyRecords()  Sets the current record's "RoomOccupancyRecords" collection
  * @method Booking             setRoomOccupancyEntities() Sets the current record's "RoomOccupancyEntities" collection
@@ -142,6 +145,10 @@ abstract class BaseBooking extends sfDoctrineRecord
               3 => 'nopayment',
              ),
              'default' => 'nopayment',
+             ));
+        $this->hasColumn('lang', 'string', 2, array(
+             'type' => 'string',
+             'length' => 2,
              ));
     }
 

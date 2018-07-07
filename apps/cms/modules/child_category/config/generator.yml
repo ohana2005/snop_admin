@@ -17,6 +17,7 @@ generator:
       list:
         display: [name, age]
         table_method: tmListHotel
+        batch_actions: {}
       filter:
         display: [name]
       form:

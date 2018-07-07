@@ -14,6 +14,8 @@ class PackageFormHotel extends PackageForm
         unset($this['hotel_id']);
 
         $this->embedI18n(['en', 'ru']);
+
+        $this->hotelize('package_items_list', 'PackageItem');
     }
 
     public function updateObject($values = null)

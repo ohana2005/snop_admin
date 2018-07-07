@@ -12,6 +12,9 @@ class RoomFormHotel extends RoomForm
     {
         parent::configure();
         unset($this['hotel_id']);
+        $this->hotelize('room_category_id', 'RoomCategory', true)
+            ->setOption('add_empty', false)
+        ;
     }
 
     public function updateObject($values = null)

@@ -19,7 +19,7 @@ generator:
         display: [RoomCategory, number]
         batch_actions: {}
         object_actions:
-          occupancy: {label: '<i class="fa fa-cloud"></i>', action: occupancy, params: {class: 'btn btn-default', title: 'Occupancy'}}
+#          occupancy: {label: '<i class="fa fa-cloud"></i>', action: occupancy, params: {class: 'btn btn-default', title: 'Occupancy'}}
           _edit: ~
           _delete: ~
       filter:

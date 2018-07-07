@@ -12,5 +12,8 @@ class RoomFormFilter extends BaseRoomFormFilter
 {
   public function configure()
   {
+      $this->hotelize('room_category_id', 'RoomCategory', true)
+
+      ;
   }
 }

@@ -17,7 +17,8 @@ generator:
         PackageItems: {renderer: get_raw}
       list:
         table_method: tmListHotel
-        display: [name, PackageItems]
+        display: [name, _items]
+        batch_actions: {}
       filter:
         display: [name]
       form:

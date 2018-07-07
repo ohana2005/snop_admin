@@ -18,13 +18,14 @@ generator:
       list:
         table_method: tmListHotel
         sort: [date_arrival, desc]
-        display: [guest_name, guest_email, date_arrival, nights, price]
+        display: [guest_name, guest_email, date_arrival, nights, price, _data]
         object_actions:
+          info: {label: '<i class="fa fa-info"></i>', action: info, params: {class: 'btn btn-default system_popup_link', title: 'Info'}}
           _delete: ~
         batch_actions: {}
         actions: {}
       filter:
-        display: [guest_name, guest_email, guest_telephone]
+        display: [guest_name, guest_email, guest_telephone, lang]
       form:    ~
       edit:    ~
       new:     ~

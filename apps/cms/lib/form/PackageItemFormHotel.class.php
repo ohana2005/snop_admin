@@ -12,6 +12,8 @@ class PackageItemFormHotel extends PackageItemForm
     {
         parent::configure();
         unset($this['hotel_id']);
+
+        $this->hotelize('packages_list', 'Package', true);
     }
 
     public function updateObject($values = null)

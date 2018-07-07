@@ -208,6 +208,7 @@ Booking:
     summary: string()
     hash: string(40)
     payment_status: {type: enum, values: [pending, paid, cancelled, nopayment], default: nopayment}
+    lang: string(2)
   relations:
     Hotel: {foreignAlias: Bookings, onDelete: CASCADE}
 
