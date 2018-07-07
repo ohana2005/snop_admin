@@ -1,7 +1,7 @@
 <div id="sf_admin_container">
     <div class="page-heading animated fadeInDownBig">
 
-        <h1>Manage prices</h1>
+        <h1><?php echo __('Manage prices') ?></h1>
     </div>
 
 
@@ -13,7 +13,7 @@
 
     <div>
         <div class="box-info full">
-            <h2><strong>Prices for all rooms</strong></h2>
+            <h2><strong><?php echo __('Prices for all rooms') ?></strong></h2>
 
 
             <div id="sf_admin_content">
@@ -29,7 +29,7 @@
                                         <input type="text" name="date_to" class="datepckr" value="<?php echo  date('d.m.Y', strtotime($date_to)); ?>" >
                                     </td>
                                     <td>
-                                        <button>Change</button>
+                                        <button><?php echo __('Change') ?></button>
                                     </td>
                                 </tr>
                             </table>
@@ -38,7 +38,7 @@
                     <div id="occupancyDates">
                         <table cellpadding="0" cellspacing="0" class="occupancyTable">
                             <tr class="years">
-                                <th rowspan="3">Room</th>
+                                <th rowspan="3"><?php echo __('Room') ?></th>
                                 <?php foreach($period['years'] as $year): ?>
                                     <td colspan="<?php echo $year['span']; ?>"><?php echo $year['year']; ?></td>
                                 <?php endforeach; ?>
@@ -69,15 +69,15 @@
                         </table>
                     </div>
                     <div id="priceControls">
-                        <div id="displayDateFrom">Date from: <span></span></div>
-                        <div id="displayDateTo">Date to: <span></span></div>
+                        <div id="displayDateFrom"><?php echo __('Date from') ?>: <span></span></div>
+                        <div id="displayDateTo"><?php echo __('Date to') ?>: <span></span></div>
                         <div class="buttons">
-                            <button id="addPriceButton">Set price</button>
+                            <button id="addPriceButton"><?php echo __('Set price') ?></button>
                         </div>
                     </div>
                 </div>
                 <div class="sf_admin_actions">
-                    <a class="btn btn-default" href="<?php echo url_for('room_category/index'); ?>">Back to list</a>
+                    <a class="btn btn-default" href="<?php echo url_for('room_category/index'); ?>"><?php echo __('Back to list') ?></a>
                 </div>
             </div>
         </div>

@@ -16,4 +16,10 @@ class BookingTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Booking');
     }
+
+    public function tmListHotel(Doctrine_Query $q){
+        $a = $q->getRootAlias();
+        $q->andWhere("$a.hotel_id = ?", sfContext::getInstance()->getUser()->getHotelId());
+        return $q;
+    }
 }

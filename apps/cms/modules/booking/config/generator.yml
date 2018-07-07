@@ -1,32 +1,32 @@
 generator:
   class: myDoctrineGenerator
   param:
-    model_class:           Package
+    model_class:           Booking
     theme:                 my_admin_lanceng
     non_verbose_templates: true
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          package
+    route_prefix:          booking
     with_doctrine_route:   true
     actions_base_class:    sfActions
 
     config:
       actions: ~
       fields:
-        PackageItems: {renderer: get_raw}
+        date_arrival: {renderer: project_date}
       list:
         table_method: tmListHotel
-        display: [name, _items]
+        sort: [date_arrival, desc]
+        display: [guest_name, guest_email, date_arrival, nights, price, _data]
+        object_actions:
+          info: {label: '<i class="fa fa-info"></i>', action: info, params: {class: 'btn btn-default system_popup_link', title: 'Info'}}
+          _delete: ~
         batch_actions: {}
+        actions: {}
       filter:
-        display: [name]
-      form:
-        class: PackageFormHotel
-        display:
-          Settings: [min_stay, max_stay, min_adults, max_adults, min_children, max_children, package_items_list]
-          En: [en]
-          Ru: [ru]
+        display: [guest_name, guest_email, guest_telephone, lang]
+      form:    ~
       edit:    ~
       new:     ~
       

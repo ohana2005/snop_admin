@@ -43,4 +43,11 @@ class hotelActions extends autoHotelActions
 
         return $this->redirect('dashboard/index');
     }
+
+    public function executeGetscript(sfWebRequest $request)
+    {
+        $this->Hotel = $this->getRoute()->getObject();
+
+        $this->url = "http://" . BOOKING_HOST . '/widget/' . $this->Hotel->slug . '/en/load';
+    }
 }

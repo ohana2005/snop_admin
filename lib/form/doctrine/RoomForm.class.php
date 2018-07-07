@@ -2,7 +2,7 @@
 
 /**
  * Room form.
- sfDoctrineFormGenerator *
+ * sfDoctrineFormGenerator *
  * @package    cms
  * @subpackage form
  * @author     Your name here
@@ -10,7 +10,8 @@
  */
 class RoomForm extends BaseRoomForm
 {
-  public function configure()
-  {
-  }
+    public function configure()
+    {
+
+    }
 }

@@ -22,112 +22,133 @@ abstract class BaseBookingForm extends BaseFormDoctrine
        
             
             
-              'id'              => new sfWidgetFormInputHidden(),
+              'id'                => new sfWidgetFormInputHidden(),
       
         
         
        
             
             
-              'hotel_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => false)),
+              'hotel_id'          => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'), 'add_empty' => false)),
       
         
         
        
             
             
-              'date_arrival'    => new sfWidgetFormDate(),
+              'date_arrival'      => new sfWidgetFormDate(),
       
         
         
        
             
             
-              'date_departure'  => new sfWidgetFormDate(),
+              'date_departure'    => new sfWidgetFormDate(),
       
         
         
        
             
             
-              'adults'          => new sfWidgetFormInputText(),
+              'adults'            => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'children'        => new sfWidgetFormInputText(),
+              'children'          => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'nights'          => new sfWidgetFormInputText(),
+              'nights'            => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'guest_name'      => new sfWidgetFormInputText(),
+              'guest_name'        => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'guest_email'     => new sfWidgetFormInputText(),
+              'guest_email'       => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'guest_telephone' => new sfWidgetFormInputText(),
+              'guest_telephone'   => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'guest_wish'      => new sfWidgetFormTextarea(),
+              'guest_wish'        => new sfWidgetFormTextarea(),
       
         
         
        
             
             
-              'price'           => new sfWidgetFormInputText(),
+              'price'             => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'summary'         => new sfWidgetFormTextarea(),
+              'summary'           => new sfWidgetFormTextarea(),
       
         
         
        
             
             
-              'hash'            => new sfWidgetFormInputText(),
+              'hash'              => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'created_at'      => new sfWidgetFormDateTime(),
+              'payment_status'    => new sfWidgetFormChoice(array('choices' => array('pending' => 'pending', 'paid' => 'paid', 'cancelled' => 'cancelled', 'nopayment' => 'nopayment'))),
       
         
         
        
             
             
-              'updated_at'      => new sfWidgetFormDateTime(),
+              'lang'              => new sfWidgetFormInputText(),
+      
+        
+        
+       
+            
+            
+              'created_at'        => new sfWidgetFormDateTime(),
+      
+        
+        
+       
+            
+            
+              'updated_at'        => new sfWidgetFormDateTime(),
+      
+        
+        
+       
+            
+            
+              'is_backend_viewed' => new sfWidgetFormInputCheckbox(),
       
         
         
@@ -135,37 +156,43 @@ abstract class BaseBookingForm extends BaseFormDoctrine
 
     $this->setValidators(array(
             
-              'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+              'id'                => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
                   
-              'hotel_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'))),
+              'hotel_id'          => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Hotel'))),
                   
-              'date_arrival'    => new sfValidatorDate(),
+              'date_arrival'      => new sfValidatorDate(),
                   
-              'date_departure'  => new sfValidatorDate(),
+              'date_departure'    => new sfValidatorDate(),
                   
-              'adults'          => new sfValidatorInteger(),
+              'adults'            => new sfValidatorInteger(),
                   
-              'children'        => new sfValidatorInteger(array('required' => false)),
+              'children'          => new sfValidatorInteger(array('required' => false)),
                   
-              'nights'          => new sfValidatorInteger(array('required' => false)),
+              'nights'            => new sfValidatorInteger(array('required' => false)),
                   
-              'guest_name'      => new sfValidatorString(array('max_length' => 255)),
+              'guest_name'        => new sfValidatorString(array('max_length' => 255)),
                   
-              'guest_email'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+              'guest_email'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   
-              'guest_telephone' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+              'guest_telephone'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   
-              'guest_wish'      => new sfValidatorString(array('required' => false)),
+              'guest_wish'        => new sfValidatorString(array('required' => false)),
                   
-              'price'           => new sfValidatorNumber(array('required' => false)),
+              'price'             => new sfValidatorNumber(array('required' => false)),
                   
-              'summary'         => new sfValidatorString(array('required' => false)),
+              'summary'           => new sfValidatorString(array('required' => false)),
                   
-              'hash'            => new sfValidatorString(array('max_length' => 40, 'required' => false)),
+              'hash'              => new sfValidatorString(array('max_length' => 40, 'required' => false)),
                   
-              'created_at'      => new sfValidatorDateTime(),
+              'payment_status'    => new sfValidatorChoice(array('choices' => array(0 => 'pending', 1 => 'paid', 2 => 'cancelled', 3 => 'nopayment'), 'required' => false)),
                   
-              'updated_at'      => new sfValidatorDateTime(),
+              'lang'              => new sfValidatorString(array('max_length' => 2, 'required' => false)),
+                  
+              'created_at'        => new sfValidatorDateTime(),
+                  
+              'updated_at'        => new sfValidatorDateTime(),
+                  
+              'is_backend_viewed' => new sfValidatorBoolean(array('required' => false)),
           ));
 
     $this->widgetSchema->setNameFormat('booking[%s]');

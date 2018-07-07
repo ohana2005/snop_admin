@@ -17,6 +17,7 @@ generator:
       list:
         display: [name, slug, admin_id]
         object_actions:
+          geturl: {label: Script, action: getscript, params: {class: 'btn btn-default system_popup_link', style: 'font-size: 10px'}}
           login: {label: '<i class="fa fa-key"></i>', action: loginAs, params: {class: 'btn btn-default', title: 'Login as'}}
           admin: {label: '<i class="fa fa-user"></i>', action: admin, params: {class: 'btn btn-default', title: 'Admin'}}
           _edit: ~

@@ -12,4 +12,22 @@
  */
 class Booking extends BaseBooking
 {
+
+    public function getRoomCategory()
+    {
+        $Br = $this->getBookingRooms()->getFirst();
+        $q = Q::c('RoomCategory', 'c')
+            ->where('c.id = ?', $Br->room_category_id)
+            ->leftJoin('c.Translation t WITH t.lang = ?', sfContext::getInstance()->getUser()->getCulture());
+        return $q->fetchOne();
+    }
+
+    public function getPackage()
+    {
+        $Bp = $this->getBookingPackages()->getFirst();
+        $q = Q::c('Package', 'p')
+            ->where('p.id = ?', $Bp->package_id)
+            ->leftJoin('p.Translation t WITH t.lang = ?', sfContext::getInstance()->getUser()->getCulture());
+        return $q->fetchOne();
+    }
 }

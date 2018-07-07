@@ -191,7 +191,7 @@ PackageItem2ChildCategory:
     ChildCategory: {onDelete: CASCADE}
 
 Booking:
-  actAs: [Timestampable]
+  actAs: [Timestampable,     BackendViewed]
   connection: doctrine
   columns:
     hotel_id: {type: integer, notnull: true}
@@ -207,6 +207,8 @@ Booking:
     price: float
     summary: string()
     hash: string(40)
+    payment_status: {type: enum, values: [pending, paid, cancelled, nopayment], default: nopayment}
+    lang: string(2)
   relations:
     Hotel: {foreignAlias: Bookings, onDelete: CASCADE}
 

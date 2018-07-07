@@ -6,6 +6,11 @@ date_default_timezone_set('Europe/Minsk');
 mb_internal_encoding('UTF-8');
 
 require_once dirname(__FILE__) . '/symfony.php';
+if(file_exists(dirname(__FILE__) . '/env.php')){
+    require_once dirname(__FILE__) . '/env.php';
+}else{
+    require_once dirname(__FILE__) . '/env.dist.php';
+}
 sfCoreAutoload::register();
 
 class ProjectConfiguration extends sfProjectConfiguration {
