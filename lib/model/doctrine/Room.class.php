@@ -62,15 +62,17 @@ class Room extends BaseRoom
         if(empty($this->_occupancy)){
             return true;
         }
-        foreach($this->_occupancy as $date => $ro){
-            if($date == $arrivalDate && $ro['is_departure']){
-                continue;
+        foreach($this->_occupancy as $date => $roArray){
+            foreach($roArray as $ro) {
+                if ($date == $arrivalDate && $ro['is_departure']) {
+                    continue 2;
+                }
+                if ($date == $departureDate && $ro['is_arrival']) {
+                    continue 2;
+                }
+                $this->_currentOccupancyDescription = $ro['info'] . "\n" . $ro['info2'];
+                return false;
             }
-            if($date == $departureDate && $ro['is_arrival']){
-                continue;
-            }
-            $this->_currentOccupancyDescription = $ro['info'] . "\n" . $ro['info2'];
-            return false;
         }
         return true;
     }
