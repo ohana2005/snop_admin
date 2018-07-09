@@ -24,21 +24,21 @@ class bookingActions extends sfActions
 
 
         $Hotel = Q::f('Hotel', $data['hotel']['id']);
-        if(!$Hotel || $Hotel->apihash != $data['hotel']['apihash']){
+        if (!$Hotel || $Hotel->apihash != $data['hotel']['apihash']) {
             return $this->errorResponse('Hotel is invalid');
         }
 
         $RoomCategory = Q::f('RoomCategory', $data['order']['room_category_id']);
-        if(!$RoomCategory || $RoomCategory->hotel_id != $Hotel->id){
+        if (!$RoomCategory || $RoomCategory->hotel_id != $Hotel->id) {
             return $this->errorResponse('Room category is invalid');
         }
         $Package = Q::f('Package', $data['order']['package_id']);
-        if(!$Package || $Package->hotel_id != $Hotel->id){
+        if (!$Package || $Package->hotel_id != $Hotel->id) {
             return $this->errorResponse('Room category is invalid');
         }
 
         $Room = $RoomCategory->findFreeRoom($data['search']['arr'], $data['search']['dep']);
-        if(!$Room){
+        if (!$Room) {
             return $this->errorResponse("No free rooms for the period {$data['search']['arr']}, {$data['search']['dep']}", 2);
         }
 
@@ -86,6 +86,24 @@ class bookingActions extends sfActions
         $Room->createBookingOccupancy($Booking);
 
 
+        $this->getResponse()->setContentType('application/json');
+        return $this->renderText(json_encode([
+            'type' => 'success',
+            'bookingId' => $Booking->id,
+            'bookingHash' => $Booking->hash
+        ]));
+    }
+
+    public function executeUpdateStatus()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $Booking = Q::f('Booking', $data['id']);
+
+        if(!$Booking || $Booking->hash != $data['hash']){
+            return $this->errorResponse('Invalid booking');
+        }
+        $Booking->payment_status = $data['status'];
+        $Booking->save();
         $this->getResponse()->setContentType('application/json');
         return $this->renderText(json_encode([
             'type' => 'success',
