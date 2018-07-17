@@ -41,6 +41,7 @@ Hotel:
     Admin: {class: sfGuardUser, local: admin_id, type: one, foreignType: one, onDelete: CASCADE}
 
 HotelConfig:
+  actAs: [Timestampable]
   connection: doctrine
   columns:
     hotel_id: {type: integer, notnull: true}
